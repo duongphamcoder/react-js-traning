@@ -1,0 +1,15 @@
+.btn {
+  border: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.btn-primary {
+  background-color: var(--bs-primary);
+}
+
+.btn-secondary {
+  background-color: var(--bs-secondary);
+}
