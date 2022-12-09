@@ -1,0 +1,17 @@
+{
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "single",
+        "double",
+        "backtick",
+        "jsx-single",
+        "jsx-double",
+        "avoid-escape",
+        "avoid-template"
+      ]
+    },
+    "minLength": 0,
+    "maxLength": 5
+}
