@@ -1,8 +1,10 @@
 import Button from 'components/button/Button';
+import Context from 'components/context';
 import ExampleItem from 'components/example-item/ExamplesItem';
 import NameForm from 'components/form/Form';
 import Heading from 'components/heading/Heading';
 import Lists from 'components/list/Lists';
+import Lazy from 'components/react-lazy';
 import { MouseEvent, FormEvent, ChangeEvent } from 'react';
 
 const styles = {
@@ -54,6 +56,14 @@ function App() {
       <ExampleItem>
         <Heading title="Examples three ( form )" className={'demo-class'} />
         <NameForm onSubmit={handleSubmit} />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples four ( React.lazy )" />
+        <Lazy />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples five ( Context )" />
+        <Context />
       </ExampleItem>
     </section>
   );
