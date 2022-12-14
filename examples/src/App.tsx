@@ -5,7 +5,9 @@ import NameForm from 'components/form/Form';
 import Heading from 'components/heading/Heading';
 import Lists from 'components/list/Lists';
 import Lazy from 'components/react-lazy';
+import Choosing from 'components/choosing-the-type';
 import { MouseEvent, FormEvent, ChangeEvent } from 'react';
+import RenderProps from 'components/render-props';
 
 const styles = {
   height: '100vh',
@@ -64,6 +66,15 @@ function App() {
       <ExampleItem>
         <Heading title="Examples five ( Context )" />
         <Context />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples six ( Choosing the Type at Runtime )" />
+        <Choosing component="photo" />
+        <Choosing component="video" />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples seven ( Render Props )" />
+        <RenderProps />
       </ExampleItem>
     </section>
   );
