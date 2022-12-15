@@ -8,6 +8,8 @@ import Lazy from 'components/react-lazy';
 import Choosing from 'components/choosing-the-type';
 import { MouseEvent, FormEvent, ChangeEvent } from 'react';
 import RenderProps from 'components/render-props';
+import StateHook from 'components/state-hook';
+import EffectHook from 'components/effect-hook';
 
 const styles = {
   height: '100vh',
@@ -75,6 +77,14 @@ function App() {
       <ExampleItem>
         <Heading title="Examples seven ( Render Props )" />
         <RenderProps />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples eight ( useState )" />
+        <StateHook />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples nine ( useEffect )" />
+        <EffectHook />
       </ExampleItem>
     </section>
   );
