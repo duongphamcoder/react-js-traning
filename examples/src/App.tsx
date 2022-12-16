@@ -10,6 +10,9 @@ import { MouseEvent, FormEvent, ChangeEvent } from 'react';
 import RenderProps from 'components/render-props';
 import StateHook from 'components/state-hook';
 import EffectHook from 'components/effect-hook';
+import RefHook from 'components/ref-hook';
+import MemoHook from 'components/memo-hook';
+import ReducerHook from 'components/reducer-hook';
 
 const styles = {
   height: '100vh',
@@ -85,6 +88,18 @@ function App() {
       <ExampleItem>
         <Heading title="Examples nine ( useEffect )" />
         <EffectHook />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples ten ( useRef )" />
+        <RefHook />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples eleven ( useMemo )" />
+        <MemoHook />
+      </ExampleItem>
+      <ExampleItem>
+        <Heading title="Examples twelve ( useReducer )" />
+        <ReducerHook />
       </ExampleItem>
     </section>
   );
