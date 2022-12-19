@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+# Big Practice - Blog Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+- This is a website sharing about all issues, with many different fields.
+- The application will have some basic functions such as:
+  - As a user they can create a blog item.
+  - User can delete blog.
+  - Users can update their blog content.
+  - Users can search for the blog they want.
 
-In the project directory, you can run:
+## Technical
 
-### `npm start`
+- HTML5 / CSS3 / REACTJS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Timeline
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 10 days
 
-### `npm test`
+## Teamsize
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 1 dev
 
-### `npm run build`
+## Editor
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Visual Studio Code
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## REQUIREMENTS
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Using basic hooks in react
+- Apply React/JSX Style Guide
+- Apply Firebase
 
-### `npm run eject`
+## Targets
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Apply the knowledge learned about ReactJs
+- Works with firebase
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Step one:** Clone the code folder from git to your device
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Choose a path to save that file -> At that path open the command window
+- Run command
+- Git clone:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+ https://github.com/phamtanduongtk29/react-js-traning.git
+```
 
-## Learn More
+**Step two:** Run project
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Turn on Visual Studio Code. Open the folder you just cloned to your computer.
+- Open terminal, run:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+    npm install
+```
+
+- Run start project:
+
+```bash
+    npm start
+```
