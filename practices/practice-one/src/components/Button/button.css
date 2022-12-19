@@ -1,0 +1,29 @@
+.btn {
+  border: none;
+  cursor: pointer;
+}
+
+.btn-default {
+  background-color: transparent;
+}
+
+.btn-primary {
+  background-color: var(--bs-primary-color);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: var(--bs-secondary-color);
+}
+
+.btn-small {
+  padding: 5px;
+}
+
+.btn-medium {
+  padding: 10px 20px;
+}
+
+.btn-large {
+  padding: 17px 25px;
+}
