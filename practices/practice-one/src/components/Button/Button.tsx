@@ -1,6 +1,7 @@
 import { ReactNode, MouseEvent } from "react";
 import { NavLink } from "react-router-dom";
 import "./button.css";
+
 type ClickEvent = (event: MouseEvent) => void;
 
 interface ButtonProps {
@@ -15,7 +16,7 @@ interface ButtonProps {
   onClick?: ClickEvent;
 }
 
-const buttonStize = {
+const buttonSize = {
   sm: "small",
   md: "medium",
   lg: "large",
@@ -32,7 +33,8 @@ function Button(props: ButtonProps) {
     ...rest
   } = props;
   const TagName = tag === "a" ? NavLink : tag;
-  const className = `btn btn-${variant} btn-${buttonStize[size]}`;
+  const className = `btn btn-${variant} btn-${buttonSize[size]}`;
+
   return (
     <TagName className={className} to={path} {...rest}>
       {children || title}
