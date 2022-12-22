@@ -11,13 +11,13 @@
 }
 
 .new-blog .card .card-details {
-  height: 100%;
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
+  position: relative;
 }
 
-.new-blog .card-details .heading:last-child {
+.new-blog .card-details .heading:nth-child(3) {
   font-size: 29px;
   font-weight: 400;
   padding: 10px 0 15px;
@@ -31,10 +31,11 @@
 
 .new-blog .card-control {
   position: absolute;
-  bottom: 20px;
-  left: 380px;
+  bottom: 0;
+  left: 0;
 }
 
 .new-blog .card-control .btn {
   padding-right: 40px;
+  padding-left: 0;
 }
