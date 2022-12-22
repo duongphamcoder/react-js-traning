@@ -19,9 +19,20 @@ type CardProps = {
 };
 
 function Card(props: CardProps) {
-  const { path, image, category = "", title, timeStamp, isUser, onDelete, onEdit } = props;
+  const {
+    category = "",
+    title = "",
+    path,
+    image,
+    timeStamp,
+    isUser,
+    onDelete,
+    onEdit,
+    ...rest
+  } = props;
+
   return (
-    <Link to={path} className="card">
+    <Link to={path} className="card" {...rest}>
       <section className="card-image">
         <img src={image} alt={title} />
       </section>

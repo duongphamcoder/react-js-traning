@@ -7,7 +7,8 @@ interface HeadingProps {
 function Heading(props: HeadingProps) {
   const { title, tag = "h2" } = props;
   const TagName = tag;
-  return <TagName className="heading">{title}</TagName>;
+
+  return <TagName>{title}</TagName>;
 }
 
 export default Heading;
