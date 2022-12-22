@@ -12,6 +12,7 @@ interface ButtonProps {
   variant?: "primary" | "secondary" | "default";
   size?: "sm" | "md" | "lg";
   borderRadius?: "5px" | "10px" | "15px" | "25px" | "50%";
+  disabled: boolean;
   children?: ReactNode;
   onClick?: ClickEvent;
 }
@@ -36,7 +37,7 @@ function Button(props: ButtonProps) {
   const className = `btn btn-${variant} btn-${buttonSize[size]}`;
 
   return (
-    <TagName className={className} to={path} {...rest}>
+    <TagName className={className} to={path} {...rest} disabled={props.disabled}>
       {children || title}
     </TagName>
   );

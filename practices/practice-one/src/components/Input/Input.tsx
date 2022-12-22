@@ -15,6 +15,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 function Input(props: InputProps) {
   const { customStyle } = props;
+
   return <input className="input" {...props} style={customStyle} />;
 }
 
