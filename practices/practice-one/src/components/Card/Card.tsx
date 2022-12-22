@@ -40,17 +40,17 @@ function Card(props: CardProps) {
         <Heading title={category} tag="h3" />
         <p className="card-details-time">{timeStamp}</p>
         <Heading title={title} />
+        {isUser && (
+          <section className="card-control">
+            <Button onClick={onDelete}>
+              <img src={bntDelete} alt="Button remove" />
+            </Button>
+            <Button onClick={onEdit}>
+              <img src={bntEdit} alt="Button edit" />
+            </Button>
+          </section>
+        )}
       </section>
-      {isUser && (
-        <section className="card-control">
-          <Button onClick={onDelete}>
-            <img src={bntDelete} alt="Button remove" />
-          </Button>
-          <Button onClick={onEdit}>
-            <img src={bntEdit} alt="Button edit" />
-          </Button>
-        </section>
-      )}
     </Link>
   );
 }
