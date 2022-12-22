@@ -1,11 +1,11 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, InputHTMLAttributes } from "react";
 import "./input.css";
 
 type CustomStyle = {
   [key: string]: string;
 };
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type: "text" | "password" | "date" | "checkbox" | "radio" | "submit";
   placeholder?: string;
   name: string;
@@ -15,6 +15,7 @@ interface InputProps {
 
 function Input(props: InputProps) {
   const { customStyle } = props;
+
   return <input className="input" {...props} style={customStyle} />;
 }
 
