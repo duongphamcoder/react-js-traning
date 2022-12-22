@@ -1,6 +1,9 @@
 header {
-  min-height: 500px;
   font-family: var(--bs-primary-font);
+}
+
+.container {
+  padding: 0 20px 30px;
 }
 
 header .header-logo {
@@ -80,6 +83,10 @@ header .header-navigation .btn.active {
   background-color: var(--bs-primary-color);
   color: white;
   box-shadow: unset;
+}
+
+header .header-filter-search {
+  display: flex;
 }
 
 header .header-filter-search input {

@@ -5,6 +5,9 @@ import Heading from "components/Heading/Heading";
 import Button from "components/Button/Button";
 import Paragraph from "components/Paragraph/Paragraph";
 import Input from "components/Input/Input";
+
+import "./header.css";
+
 function Header() {
   return (
     <header className="container">
