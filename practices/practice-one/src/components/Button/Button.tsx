@@ -12,7 +12,7 @@ interface ButtonProps {
   variant?: "primary" | "secondary" | "default";
   size?: "sm" | "md" | "lg";
   borderRadius?: "5px" | "10px" | "15px" | "25px" | "50%";
-  disabled: boolean;
+  disabled?: boolean;
   children?: ReactNode;
   onClick?: ClickEvent;
 }
