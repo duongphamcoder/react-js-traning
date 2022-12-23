@@ -7,7 +7,7 @@ import "./card.css";
 import bntDelete from "assets/icons/delete-icon.svg";
 import bntEdit from "assets/icons/update-icon.svg";
 
-type CardProps = {
+export type CardProps = {
   path: string;
   image: string;
   category?: string;
