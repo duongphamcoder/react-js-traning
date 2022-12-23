@@ -1,0 +1,41 @@
+.new-blog .card {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 20px;
+  font-family: var(--bs-primary-font);
+  position: relative;
+}
+
+.new-blog .card .card-image img {
+  height: 200px;
+}
+
+.new-blog .card .card-details {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.new-blog .card-details .heading:nth-child(3) {
+  font-size: 29px;
+  font-weight: 400;
+  padding: 10px 0 15px;
+  line-height: 35px;
+}
+
+.new-blog .card-details .card-details-time {
+  font-size: 15px;
+  color: black;
+}
+
+.new-blog .card-control {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.new-blog .card-control .btn {
+  padding-right: 40px;
+  padding-left: 0;
+}
