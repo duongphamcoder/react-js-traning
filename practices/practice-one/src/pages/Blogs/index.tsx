@@ -41,7 +41,7 @@ const blogs: CardProps[] = [
   },
 ];
 
-function CoursePage() {
+function BlogsPage() {
   return (
     <>
       <NewBlog data={data} />
@@ -50,4 +50,4 @@ function CoursePage() {
   );
 }
 
-export default CoursePage;
+export default BlogsPage;
