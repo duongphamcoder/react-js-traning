@@ -13,7 +13,9 @@ function Blogs(props: BlogsProps) {
     <section className="list-blog">
       <Grid col={4}>
         {data.map((blog, index) => (
-          <Card {...blog} key={index} />
+          <section>
+            <Card {...blog} key={index} />
+          </section>
         ))}
       </Grid>
     </section>
