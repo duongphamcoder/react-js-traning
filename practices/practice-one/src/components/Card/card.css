@@ -6,6 +6,7 @@
   text-decoration: none;
   box-shadow: 0 0 20px 1px rgba(236, 63, 48, 0.1);
   font-family: var(--bs-secondary-font);
+  background-color: white;
 }
 
 .card .card-image {
