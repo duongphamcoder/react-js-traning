@@ -5,40 +5,11 @@ import Heading from "components/Heading/Heading";
 import Button from "components/Button/Button";
 import Paragraph from "components/Paragraph/Paragraph";
 import Input from "components/Input/Input";
+import { navLinks } from "constants/navLinks";
 
 import "./header.css";
 
 function Header() {
-  const navLinks = [
-    {
-      title: "All topic",
-      path: "/",
-    },
-    {
-      title: "HTML/CSS",
-      path: "/html-css",
-    },
-    {
-      title: "JavaScript",
-      path: "/javascript",
-    },
-    {
-      title: "NodeJS",
-      path: "/node-js",
-    },
-    {
-      title: "AI",
-      path: "/ai",
-    },
-    {
-      title: "ReactJS",
-      path: "/react-js",
-    },
-    {
-      title: "VueJS",
-      path: "/vue-js",
-    },
-  ];
   return (
     <header className="container">
       <section className="header-logo">
