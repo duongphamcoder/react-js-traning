@@ -1,9 +1,6 @@
-header {
-  font-family: var(--bs-primary-font);
-}
-
 .container {
   padding: 0 20px 30px;
+  font-family: var(--bs-primary-font);
 }
 
 header .header-logo {

@@ -9,6 +9,36 @@ import Input from "components/Input/Input";
 import "./header.css";
 
 function Header() {
+  const navLinks = [
+    {
+      title: "All topic",
+      path: "/",
+    },
+    {
+      title: "HTML/CSS",
+      path: "/html-css",
+    },
+    {
+      title: "JavaScript",
+      path: "/javascript",
+    },
+    {
+      title: "NodeJS",
+      path: "/node-js",
+    },
+    {
+      title: "AI",
+      path: "/ai",
+    },
+    {
+      title: "ReactJS",
+      path: "/react-js",
+    },
+    {
+      title: "VueJS",
+      path: "/vue-js",
+    },
+  ];
   return (
     <header className="container">
       <section className="header-logo">
@@ -28,13 +58,9 @@ function Header() {
       </section>
       <section className="header-filter">
         <nav className="header-navigation">
-          <Button tag="a" title="All topic" path="/" />
-          <Button tag="a" title="HTML/CSS" path="html-css" />
-          <Button tag="a" title="JavaScript" path="javascript" />
-          <Button tag="a" title="NodeJS" path="nodejs" />
-          <Button tag="a" title="AI" path="ai" />
-          <Button tag="a" title="ReactJS" path="reactjs" />
-          <Button tag="a" title="VueJS" path="vuejs" />
+          {navLinks.map(({ title, path }, index) => (
+            <Button tag="a" title={title} path={path} key={index} />
+          ))}
         </nav>
         <section className="header-filter-search">
           <Input type="text" name="filter" placeholder="Give me a keyword..." />
