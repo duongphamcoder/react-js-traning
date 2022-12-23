@@ -1,0 +1,45 @@
+.login {
+  width: 500px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px 1px silver;
+  border-radius: 5px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login .heading {
+  font-size: 35px;
+  line-height: 45px;
+  padding: 20px 0;
+  color: var(--bs-primary-color);
+}
+
+.login .login-btn {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.login .login-btn .btn {
+  box-shadow: 0 0 0 1px silver;
+  border-radius: 25px;
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+
+.login .login-btn .btn:first-child {
+  background-color: blue;
+}
+
+.login .login-btn .btn:last-child {
+  background-color: crimson;
+}
+
+.login .login-btn .btn:hover {
+  opacity: 0.8;
+}
