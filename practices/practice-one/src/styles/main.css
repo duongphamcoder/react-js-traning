@@ -8,3 +8,6 @@
 
 /* Section styles */
 @import url(./sections/index.css);
+
+/* Layout styles */
+@import url(./layouts/index.css);
