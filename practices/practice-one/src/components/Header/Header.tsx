@@ -6,10 +6,15 @@ import Button from "components/Button/Button";
 import Paragraph from "components/Paragraph/Paragraph";
 import Input from "components/Input/Input";
 import { navLinks } from "constants/navLinks";
+import Form from "components/Form/Form";
 
 import "./header.css";
+import { FormEvent, useState } from "react";
+import Overlay from "components/Overlay/Overlay";
 
 function Header() {
+  const [popup, setPopup] = useState(true);
+  const handleSubmit = (event: FormEvent) => {};
   return (
     <header className="container">
       <section className="header-logo">
@@ -37,6 +42,11 @@ function Header() {
           <Input type="text" name="filter" placeholder="Give me a keyword..." />
         </section>
       </section>
+      {popup && (
+        <Overlay>
+          <Form onSubmit={handleSubmit} />
+        </Overlay>
+      )}
     </header>
   );
 }
