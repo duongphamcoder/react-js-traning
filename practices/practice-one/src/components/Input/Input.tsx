@@ -6,10 +6,12 @@ type CustomStyle = {
 };
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  type: "text" | "password" | "date" | "checkbox" | "radio" | "submit";
+  type: "text" | "password" | "date" | "checkbox" | "radio" | "submit" | "file";
   placeholder?: string;
   name: string;
   customStyle?: CustomStyle;
+  id?: string;
+
   onChange?: (event: ChangeEvent) => void;
 }
 
