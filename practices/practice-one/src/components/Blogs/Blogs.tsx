@@ -9,13 +9,12 @@ type BlogsProps = {
 
 function Blogs(props: BlogsProps) {
   const { data } = props;
+
   return (
     <section className="list-blog">
       <Grid col={4}>
         {data.map((blog, index) => (
-          <section>
-            <Card {...blog} key={index} />
-          </section>
+          <Card {...blog} key={blog.id} />
         ))}
       </Grid>
     </section>
