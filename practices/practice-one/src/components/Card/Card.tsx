@@ -8,6 +8,7 @@ import bntDelete from "assets/icons/delete-icon.svg";
 import bntEdit from "assets/icons/update-icon.svg";
 
 export type CardProps = {
+  id: string;
   path: string;
   image: string;
   category?: string;
@@ -20,6 +21,7 @@ export type CardProps = {
 
 function Card(props: CardProps) {
   const {
+    id,
     category = "",
     title = "",
     path,
