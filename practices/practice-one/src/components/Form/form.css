@@ -1,0 +1,60 @@
+.form {
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 20px;
+  font-family: var(--bs-primary-font);
+  box-shadow: 0 0 10px 1px silver;
+}
+
+.form .form-item {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.form .form-item:nth-child(3) {
+  display: block;
+  text-align: center;
+  box-shadow: unset;
+}
+
+.form .form-item label {
+  text-transform: capitalize;
+  font-size: 20px;
+}
+
+.form .form-item:nth-child(3) label {
+  display: inline-flex;
+  width: 250px;
+  height: 200px;
+  box-shadow: 0 0 0 1px var(--bs-primary-color);
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--bs-primary-color);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.form .form-item select {
+  padding: 10px;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 1px var(--bs-primary-color);
+}
+
+.form .form-item:nth-child(4) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form .form-item:nth-child(4) .btn {
+  padding: 15px 40px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
