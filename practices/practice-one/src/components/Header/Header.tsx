@@ -9,12 +9,16 @@ import { navLinks } from "constants/navLinks";
 import Form from "components/Form/Form";
 
 import "./header.css";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, MouseEvent } from "react";
 import Overlay from "components/Overlay/Overlay";
-
 function Header() {
-  const [popup, setPopup] = useState(true);
+  const [popup, setPopup] = useState(false);
+
   const handleSubmit = (event: FormEvent) => {};
+  const closeForm = (event: MouseEvent) => {
+    setPopup(false);
+  };
+
   return (
     <header className="container">
       <section className="header-logo">
@@ -29,7 +33,14 @@ function Header() {
           <Paragraph content="Stay up to date with our portfolio" />
         </section>
         <section className="header-heading-item">
-          <Button variant="primary" title="New blog" size="md" />
+          <Button
+            variant="primary"
+            title="New blog"
+            size="md"
+            onClick={(event: MouseEvent) => {
+              setPopup(true);
+            }}
+          />
         </section>
       </section>
       <section className="header-filter">
@@ -43,7 +54,7 @@ function Header() {
         </section>
       </section>
       {popup && (
-        <Overlay>
+        <Overlay onClick={closeForm}>
           <Form onSubmit={handleSubmit} />
         </Overlay>
       )}
