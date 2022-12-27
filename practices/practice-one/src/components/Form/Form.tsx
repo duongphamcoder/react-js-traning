@@ -4,7 +4,6 @@ import Input from "components/Input/Input";
 import { ReactNode, FormEvent, ChangeEvent, MouseEvent } from "react";
 import "./form.css";
 type FormProps = {
-  children?: ReactNode;
   action?: string;
   method?: "GET" | "POST";
   onChange?: (event: ChangeEvent) => void;
@@ -28,7 +27,7 @@ const categorys = [
 ];
 
 function Form(props: FormProps) {
-  const { children, onChange, ...rest } = props;
+  const { onChange, ...rest } = props;
   return (
     <form
       {...rest}
