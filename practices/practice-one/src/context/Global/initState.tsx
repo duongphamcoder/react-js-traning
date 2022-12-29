@@ -2,7 +2,7 @@ export type StateParam = {
   uid: string;
   blog: {
     image: string;
-    name: string;
+    title: string;
     category: string;
   };
 };
@@ -11,7 +11,7 @@ export const initState: StateParam = {
   uid: "",
   blog: {
     image: "",
-    name: "",
+    title: "",
     category: "",
   },
 };

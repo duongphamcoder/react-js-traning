@@ -7,16 +7,50 @@ import Paragraph from "components/Paragraph/Paragraph";
 import Input from "components/Input/Input";
 import { navLinks } from "constants/navLinks";
 import Form from "components/Form/Form";
-
 import "./header.css";
-import { FormEvent, useState, MouseEvent } from "react";
+import { FormEvent, useState, MouseEvent, ChangeEvent } from "react";
 import Overlay from "components/Overlay/Overlay";
+import useStore from "hooks/useStore";
+import { ContextAction } from "constants/contextAction";
+import validation from "helpers/validation/empty";
+
 function Header() {
+  const [state, dispath] = useStore();
   const [popup, setPopup] = useState(false);
 
-  const handleSubmit = (event: FormEvent) => {};
+  const { blog } = state;
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const { dataFields, error } = validation(blog);
+    if (error) {
+      // I will add the error message later
+      alert("Error");
+      return;
+    }
+  };
+
   const closeForm = (event: MouseEvent) => {
     setPopup(false);
+  };
+
+  const handleSetValueBlog = (event: ChangeEvent) => {
+    type InputType = HTMLInputElement | HTMLSelectElement;
+    const element: InputType = event.target as InputType;
+    const key: string = element.name;
+    let value: string = element.value;
+    if (element.type === "file") {
+      const fileElement: HTMLInputElement = element as HTMLInputElement;
+      const file = fileElement.files ? fileElement.files[0] : new File([], "temp.jpg");
+      value = URL.createObjectURL(file);
+    }
+    dispath({
+      type: ContextAction.SET_BLOG,
+      payload: {
+        ...blog,
+        [key]: value,
+      },
+    });
   };
 
   return (
@@ -55,7 +89,7 @@ function Header() {
       </section>
       {popup && (
         <Overlay onClick={closeForm}>
-          <Form onSubmit={handleSubmit} />
+          <Form data={blog} onSubmit={handleSubmit} onChange={handleSetValueBlog} />
         </Overlay>
       )}
     </header>

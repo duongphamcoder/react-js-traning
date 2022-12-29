@@ -1,9 +1,11 @@
 import Button from "components/Button/Button";
 import Heading from "components/Heading/Heading";
 import Input from "components/Input/Input";
+import { BlogPayload } from "context/Global/reducer";
 import { ReactNode, FormEvent, ChangeEvent, MouseEvent } from "react";
 import "./form.css";
 type FormProps = {
+  data: BlogPayload;
   action?: string;
   method?: "GET" | "POST";
   onChange?: (event: ChangeEvent) => void;
@@ -27,7 +29,7 @@ const categorys = [
 ];
 
 function Form(props: FormProps) {
-  const { onChange, ...rest } = props;
+  const { data, onChange, ...rest } = props;
   return (
     <form
       {...rest}
@@ -41,13 +43,14 @@ function Form(props: FormProps) {
           name="title"
           type="text"
           id="title"
+          value={data.title}
           placeholder="Enter title..."
           onChange={onChange}
         />
       </div>
       <div className="form-item">
         <label htmlFor="category">category</label>
-        <select name="category" id="category" onChange={onChange}>
+        <select name="category" id="category" value={data.category} onChange={onChange}>
           <option value="">--- Select caregory ---</option>
           {categorys.map(({ id, name }) => (
             <option value={id} key={id}>
@@ -57,7 +60,13 @@ function Form(props: FormProps) {
         </select>
       </div>
       <div className="form-item">
-        <label htmlFor="image">select image</label>
+        <label
+          htmlFor="image"
+          style={{
+            backgroundImage: `url(${data.image})`,
+          }}>
+          {!data.image && "select image"}
+        </label>
         <Input name="image" type="file" id="image" onChange={onChange} hidden />
       </div>
       <div className="form-item">

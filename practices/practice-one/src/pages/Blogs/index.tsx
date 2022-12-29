@@ -6,7 +6,6 @@ import { useContext } from "react";
 import { GlobalContext } from "context/Global/globalContext";
 
 function BlogsPage() {
-  const [state, dispath] = useContext(GlobalContext);
   return (
     <DefaultLayout>
       <NewBlog data={data} />
