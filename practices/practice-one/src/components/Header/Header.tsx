@@ -24,7 +24,7 @@ function Header() {
     event.preventDefault();
     const { dataFields, error } = validation(blog);
     if (error) {
-      // I will add the error message later
+      // TODO: I will add the error message later
       alert("Error");
       return;
     }
@@ -41,7 +41,7 @@ function Header() {
     let value: string = element.value;
     if (element.type === "file") {
       const fileElement: HTMLInputElement = element as HTMLInputElement;
-      const file = fileElement.files ? fileElement.files[0] : new File([], "temp.jpg");
+      const file = fileElement.files ? fileElement.files[0] : new File([], "default.jpg");
       value = URL.createObjectURL(file);
     }
     dispath({
