@@ -1,3 +1,5 @@
+import { CardProps } from "components/Card/Card";
+
 export type StateParam = {
   uid: string;
   blog: {
@@ -5,6 +7,8 @@ export type StateParam = {
     title: string;
     category: string;
   };
+  blogs: CardProps[];
+  loading: boolean;
 };
 
 export const initState: StateParam = {
@@ -14,6 +18,8 @@ export const initState: StateParam = {
     title: "",
     category: "",
   },
+  blogs: [],
+  loading: false,
 };
 
 export default initState;

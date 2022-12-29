@@ -11,27 +11,59 @@ import "./header.css";
 import { FormEvent, useState, MouseEvent, ChangeEvent } from "react";
 import Overlay from "components/Overlay/Overlay";
 import useStore from "hooks/useStore";
-import { ContextAction } from "constants/contextAction";
 import validation from "helpers/validation/empty";
+import firebaseService from "services/firebase";
+import { setBlog, setLoading, addBlog } from "context/Global/actions";
 
 function Header() {
   const [state, dispath] = useStore();
   const [popup, setPopup] = useState(false);
 
-  const { blog } = state;
+  const { blog, loading, blogs } = state;
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     const { dataFields, error } = validation(blog);
     if (error) {
-      // I will add the error message later
+      // TODO: I will add the error message later
       alert("Error");
       return;
     }
+    dispath(setLoading(true));
+    firebaseService("demo")
+      .addData({
+        ...blog,
+        uid: 123,
+      })
+      .then((res) => {
+        dispath(
+          addBlog({
+            ...blog,
+            id: res.id,
+          })
+        );
+        dispath(setLoading(false));
+        dispath(
+          setBlog({
+            image: "",
+            title: "",
+            category: "",
+          })
+        );
+      });
   };
+
+  console.log("blogs", blogs);
 
   const closeForm = (event: MouseEvent) => {
     setPopup(false);
+    dispath(
+      setBlog({
+        image: "",
+        title: "",
+        category: "",
+      })
+    );
   };
 
   const handleSetValueBlog = (event: ChangeEvent) => {
@@ -41,16 +73,19 @@ function Header() {
     let value: string = element.value;
     if (element.type === "file") {
       const fileElement: HTMLInputElement = element as HTMLInputElement;
-      const file = fileElement.files ? fileElement.files[0] : new File([], "temp.jpg");
+      const file = fileElement.files
+        ? fileElement.files[0]
+        : new File([], "default.jpg", {
+            type: "image/jpeg",
+          });
       value = URL.createObjectURL(file);
     }
-    dispath({
-      type: ContextAction.SET_BLOG,
-      payload: {
+    dispath(
+      setBlog({
         ...blog,
         [key]: value,
-      },
-    });
+      })
+    );
   };
 
   return (
@@ -92,6 +127,22 @@ function Header() {
           <Form data={blog} onSubmit={handleSubmit} onChange={handleSetValueBlog} />
         </Overlay>
       )}
+
+      {
+        // TODO: update to late
+        loading && (
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              fontSize: "30px",
+              zIndex: "10000",
+            }}>
+            Loading.....
+          </div>
+        )
+      }
     </header>
   );
 }
