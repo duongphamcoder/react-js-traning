@@ -53,8 +53,6 @@ function Header() {
       });
   };
 
-  console.log("blogs", blogs);
-
   const closeForm = (event: MouseEvent) => {
     setPopup(false);
     dispath(
