@@ -73,11 +73,7 @@ function Header() {
     let value: string = element.value;
     if (element.type === "file") {
       const fileElement: HTMLInputElement = element as HTMLInputElement;
-      const file = fileElement.files
-        ? fileElement.files[0]
-        : new File([], "default.jpg", {
-            type: "image/jpeg",
-          });
+      const file = fileElement.files ? fileElement.files[0] : new File([], "default.jpg");
       value = URL.createObjectURL(file);
     }
     dispath(
