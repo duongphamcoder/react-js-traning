@@ -13,13 +13,13 @@ import Overlay from "components/Overlay/Overlay";
 import useStore from "hooks/useStore";
 import validation from "helpers/validation/empty";
 import firebaseService from "services/firebase";
-import { setBlog, setLoading, addBlog } from "context/Global/actions";
+import { setBlog, setLoading } from "context/Global/actions";
 
 function Header() {
   const [state, dispath] = useStore();
   const [popup, setPopup] = useState(false);
 
-  const { blog, loading, blogs } = state;
+  const { blog, loading } = state;
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -33,15 +33,9 @@ function Header() {
     firebaseService("demo")
       .addData({
         ...blog,
-        uid: 123,
+        uid: 123, // TODO:Update to late
       })
       .then((res) => {
-        dispath(
-          addBlog({
-            ...blog,
-            id: res.id,
-          })
-        );
         dispath(setLoading(false));
         dispath(
           setBlog({

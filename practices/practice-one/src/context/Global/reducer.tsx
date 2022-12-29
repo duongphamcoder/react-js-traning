@@ -10,7 +10,7 @@ export type BlogPayload = {
 
 export type ActionParam = {
   type: string;
-  payload: BlogPayload | string | boolean | CardProps;
+  payload: BlogPayload | string | boolean | CardProps[];
 };
 
 export type ReducerProps = (state: StateParam, action: ActionParam) => StateParam;
@@ -36,7 +36,7 @@ const reducer: ReducerProps = (state: StateParam, action: ActionParam) => {
     case ContextAction.ADD_BLOG: {
       return {
         ...state,
-        blogs: [...state.blogs, action.payload as CardProps],
+        blogs: action.payload as CardProps[],
       };
     }
     default:

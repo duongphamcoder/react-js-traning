@@ -23,7 +23,7 @@ export const setUid = (data: string): ActionParam => {
   };
 };
 
-export const addBlog = (data: CardProps): ActionParam => {
+export const setBlogs = (data: CardProps[]): ActionParam => {
   return {
     type: ContextAction.ADD_BLOG,
     payload: data,
