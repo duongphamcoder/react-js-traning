@@ -12,11 +12,11 @@ import "./header.css";
 import { FormEvent, useState, MouseEvent } from "react";
 import Overlay from "components/Overlay/Overlay";
 function Header() {
-  const [popup, setPopup] = useState(false);
+  const [isShowForm, setIsShowForm] = useState(false);
 
   const handleSubmit = (event: FormEvent) => {};
   const closeForm = (event: MouseEvent) => {
-    setPopup(false);
+    setIsShowForm(false);
   };
 
   return (
@@ -38,7 +38,7 @@ function Header() {
             title="New blog"
             size="md"
             onClick={(event: MouseEvent) => {
-              setPopup(true);
+              setIsShowForm(true);
             }}
           />
         </section>
@@ -53,7 +53,7 @@ function Header() {
           <Input type="text" name="filter" placeholder="Give me a keyword..." />
         </section>
       </section>
-      {popup && (
+      {isShowForm && (
         <Overlay onClick={closeForm}>
           <Form onSubmit={handleSubmit} />
         </Overlay>
