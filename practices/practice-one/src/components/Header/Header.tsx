@@ -15,9 +15,8 @@ import { ContextAction } from "constants/contextAction";
 import validation from "helpers/validation/empty";
 
 function Header() {
-  const [state, dispath] = useStore();
-  const [popup, setPopup] = useState(false);
-
+  const [isShowForm, setIsShowForm] = useState(false);
+  const [state, dispatch] = useStore();
   const { blog } = state;
 
   const handleSubmit = (event: FormEvent) => {
@@ -31,7 +30,7 @@ function Header() {
   };
 
   const closeForm = (event: MouseEvent) => {
-    setPopup(false);
+    setIsShowForm(false);
   };
 
   const handleSetValueBlog = (event: ChangeEvent) => {
@@ -44,7 +43,7 @@ function Header() {
       const file = fileElement.files ? fileElement.files[0] : new File([], "default.jpg");
       value = URL.createObjectURL(file);
     }
-    dispath({
+    dispatch({
       type: ContextAction.SET_BLOG,
       payload: {
         ...blog,
@@ -72,7 +71,7 @@ function Header() {
             title="New blog"
             size="md"
             onClick={(event: MouseEvent) => {
-              setPopup(true);
+              setIsShowForm(true);
             }}
           />
         </section>
@@ -87,7 +86,7 @@ function Header() {
           <Input type="text" name="filter" placeholder="Give me a keyword..." />
         </section>
       </section>
-      {popup && (
+      {isShowForm && (
         <Overlay onClick={closeForm}>
           <Form data={blog} onSubmit={handleSubmit} onChange={handleSetValueBlog} />
         </Overlay>

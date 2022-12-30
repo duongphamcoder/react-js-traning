@@ -8,10 +8,10 @@ type GlobalProviderProps = {
 };
 
 function GlobalProvider(props: GlobalProviderProps) {
-  const [state, dispath] = useReducer(reducer, initState);
+  const [state, dispatch] = useReducer(reducer, initState);
 
   const { children } = props;
-  return <GlobalContext.Provider value={[state, dispath]}>{children}</GlobalContext.Provider>;
+  return <GlobalContext.Provider value={[state, dispatch]}>{children}</GlobalContext.Provider>;
 }
 
 export default GlobalProvider;
