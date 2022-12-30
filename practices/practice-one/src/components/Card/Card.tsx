@@ -1,6 +1,6 @@
 import Button from "components/Button";
 import Heading from "components/Heading";
-import { MouseEvent, ReactNode } from "react";
+import { MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import "./card.css";
 

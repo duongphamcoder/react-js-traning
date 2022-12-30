@@ -1,9 +1,9 @@
-import Button from "components/Button";
-import Heading from "components/Heading";
-import Input from "components/Input";
+import { FormEvent, ChangeEvent, MouseEvent } from "react";
 import { BlogPayload } from "contexts/App/reducer";
-import { ReactNode, FormEvent, ChangeEvent, MouseEvent } from "react";
+import Button from "components/Button";
+import Input from "components/Input";
 import "./form.css";
+
 type FormProps = {
   data: BlogPayload;
   action?: string;
@@ -30,6 +30,7 @@ const categorys = [
 
 const Form = (props: FormProps) => {
   const { data, onChange, ...rest } = props;
+
   return (
     <form
       {...rest}

@@ -3,6 +3,7 @@ import { useContext } from "react";
 
 const useStore = () => {
   const [state, dispatch] = useContext(AppContext);
+
   return [state, dispatch];
 };
 
