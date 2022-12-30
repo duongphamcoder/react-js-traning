@@ -1,7 +1,7 @@
 import Button from "components/Button/Button";
 import Heading from "components/Heading/Heading";
 import Input from "components/Input/Input";
-import { ReactNode, FormEvent, ChangeEvent } from "react";
+import { ReactNode, FormEvent, ChangeEvent, MouseEvent } from "react";
 import "./form.css";
 type FormProps = {
   action?: string;
@@ -29,7 +29,12 @@ const categorys = [
 function Form(props: FormProps) {
   const { onChange, ...rest } = props;
   return (
-    <form {...rest} className="form">
+    <form
+      {...rest}
+      className="form"
+      onClick={(event: MouseEvent) => {
+        event.stopPropagation();
+      }}>
       <div className="form-item">
         <label htmlFor="title">title</label>
         <Input
@@ -45,7 +50,9 @@ function Form(props: FormProps) {
         <select name="category" id="category" onChange={onChange}>
           <option value="">--- Select caregory ---</option>
           {categorys.map(({ id, name }) => (
-            <option value={id}>{name}</option>
+            <option value={id} key={id}>
+              {name}
+            </option>
           ))}
         </select>
       </div>
