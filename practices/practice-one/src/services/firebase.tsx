@@ -1,12 +1,16 @@
 import { firestore } from "helpers/firebase/config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, WithFieldValue } from "firebase/firestore";
+
+type FirebasePayload = {
+  [key: string]: any;
+};
 
 const firebaseService = (collectionPr: string) => {
   return {
-    addData: async <T,>(data: T) => {
+    addData: async (data: FirebasePayload) => {
       try {
         const result = await addDoc(collection(firestore, collectionPr), {
-          data,
+          ...data,
         });
         return result;
       } catch (error) {

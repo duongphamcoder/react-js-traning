@@ -14,10 +14,12 @@ import useStore from "hooks/useStore";
 import validation from "helpers/validation/empty";
 import firebaseService from "services/firebase";
 import { setBlog, setLoading } from "context/Global/actions";
+import { BlogPayload } from "context/Global/reducer";
+import { serverTimestamp } from "firebase/firestore";
 
 function Header() {
-  const [state, dispath] = useStore();
-  const [popup, setPopup] = useState(false);
+  const [state, dispatch] = useStore();
+  const [isShowForm, setIsShowForm] = useState(false);
 
   const { blog, loading } = state;
 
@@ -29,15 +31,16 @@ function Header() {
       alert("Error");
       return;
     }
-    dispath(setLoading(true));
-    firebaseService("demo")
+    dispatch(setLoading(true));
+    firebaseService("blogs")
       .addData({
         ...blog,
         uid: 123, // TODO:Update to late
+        createAt: serverTimestamp(),
       })
       .then((res) => {
-        dispath(setLoading(false));
-        dispath(
+        dispatch(setLoading(false));
+        dispatch(
           setBlog({
             image: "",
             title: "",
@@ -48,8 +51,8 @@ function Header() {
   };
 
   const closeForm = (event: MouseEvent) => {
-    setPopup(false);
-    dispath(
+    setIsShowForm(false);
+    dispatch(
       setBlog({
         image: "",
         title: "",
@@ -68,7 +71,7 @@ function Header() {
       const file = fileElement.files ? fileElement.files[0] : new File([], "default.jpg");
       value = URL.createObjectURL(file);
     }
-    dispath(
+    dispatch(
       setBlog({
         ...blog,
         [key]: value,
@@ -95,7 +98,7 @@ function Header() {
             title="New blog"
             size="md"
             onClick={(event: MouseEvent) => {
-              setPopup(true);
+              setIsShowForm(true);
             }}
           />
         </section>
@@ -110,7 +113,7 @@ function Header() {
           <Input type="text" name="filter" placeholder="Give me a keyword..." />
         </section>
       </section>
-      {popup && (
+      {isShowForm && (
         <Overlay onClick={closeForm}>
           <Form data={blog} onSubmit={handleSubmit} onChange={handleSetValueBlog} />
         </Overlay>
