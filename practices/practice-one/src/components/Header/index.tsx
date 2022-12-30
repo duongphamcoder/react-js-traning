@@ -1,4 +1,4 @@
-import { FormEvent, useState, MouseEvent, ChangeEvent } from "react";
+import { FormEvent, useState, MouseEvent, ChangeEvent, useRef } from "react";
 import { Link } from "react-router-dom";
 import useStore from "hooks/useStore";
 import Overlay from "components/Overlay";
@@ -6,47 +6,46 @@ import Form from "components/Form";
 import Button from "components/Button";
 import Heading from "components/Heading";
 import Paragraph from "components/Paragraph";
-import cector from "assets/icons/vector.svg";
 import Input from "components/Input";
 import { navLinks } from "constants/navLinks";
 import firebaseService from "services/firebase";
 import { setBlog, setLoading } from "reduxs/actions";
 import { serverTimestamp } from "firebase/firestore";
+import { cloudinaryUpload, validation } from "helpers";
+import { Collection } from "constants/firebase";
 import cinndy from "assets/images/cinndy.jpg";
-import { validation } from "helpers/";
+import cector from "assets/icons/vector.svg";
 import "./header.css";
 
 const Header = () => {
   const [state, dispatch] = useStore();
   const [isShowForm, setIsShowForm] = useState(false);
+  const image = useRef<File>(new File([], ""));
 
   const { blog, loading } = state;
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    const { dataFields, error } = validation(blog);
-    if (error) {
-      // TODO: I will add the error message later
-      alert("Error");
-      return;
-    }
-    dispatch(setLoading(true));
-    firebaseService("blogs")
-      .addData({
+    try {
+      const { dataFields, error } = validation(blog);
+      if (error) {
+        // TODO: I will add the error message later
+        alert("Error");
+        return;
+      }
+      dispatch(setLoading(true));
+      const { data } = await cloudinaryUpload(image.current);
+      const payload = {
         ...blog,
-        uid: 123, // TODO:Update to late
-        createAt: serverTimestamp(),
-      })
-      .then((res) => {
-        dispatch(setLoading(false));
-        dispatch(
-          setBlog({
-            image: "",
-            title: "",
-            category: "",
-          })
-        );
-      });
+        image: data.public_id,
+        uid: state.uid,
+        createdAt: serverTimestamp(),
+      };
+      await firebaseService(Collection.BLOG).addData(payload);
+      dispatch(setLoading(false));
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
   };
 
   const closeForm = (event: MouseEvent) => {
@@ -69,6 +68,7 @@ const Header = () => {
       const fileElement: HTMLInputElement = element as HTMLInputElement;
       const file = fileElement.files ? fileElement.files[0] : new File([], "default.jpg");
       value = URL.createObjectURL(file);
+      image.current = file;
     }
     dispatch(
       setBlog({

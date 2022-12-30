@@ -1,5 +1,3 @@
 import axios from "axios";
 
-export const sendRequest = axios.create({
-    baseURL: ''
-})
+export const sendRequest = axios.create()

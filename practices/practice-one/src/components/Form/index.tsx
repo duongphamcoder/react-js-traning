@@ -3,6 +3,7 @@ import { BlogPayload } from "contexts/App/reducer";
 import Button from "components/Button";
 import Input from "components/Input";
 import "./form.css";
+import { categorys } from "constants/category";
 
 type FormProps = {
   data: BlogPayload;
@@ -11,22 +12,6 @@ type FormProps = {
   onChange?: (event: ChangeEvent) => void;
   onSubmit: (event: FormEvent) => void;
 };
-
-// this is sample data, will be deleted after merge
-const categorys = [
-  {
-    id: "js",
-    name: "Javascript",
-  },
-  {
-    id: "ts",
-    name: "TypeScript",
-  },
-  {
-    id: "java",
-    name: "Java",
-  },
-];
 
 const Form = (props: FormProps) => {
   const { data, onChange, ...rest } = props;
