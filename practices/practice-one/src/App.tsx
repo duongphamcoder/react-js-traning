@@ -2,7 +2,7 @@ import BlogsPage from "pages/Blogs";
 import LoginPage from "pages/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -12,6 +12,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

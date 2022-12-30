@@ -1,7 +1,7 @@
-import Button from "components/Button/Button";
-import Heading from "components/Heading/Heading";
+import Button from "components/Button";
+import Heading from "components/Heading";
 
-function LoginPage() {
+const LoginPage = () => {
   return (
     <section className="login">
       <Heading title="Wellcome to Website" />
@@ -11,6 +11,6 @@ function LoginPage() {
       </section>
     </section>
   );
-}
+};
 
 export default LoginPage;

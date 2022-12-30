@@ -7,7 +7,7 @@ type SelectProps = {
   onChange: (event: ChangeEvent) => void;
 };
 
-function Select(props: SelectProps) {
+const Select = (props: SelectProps) => {
   const { data, value = "", ...rest } = props;
   return (
     <select value={value} {...rest} className="select-option">
@@ -20,6 +20,6 @@ function Select(props: SelectProps) {
       })}
     </select>
   );
-}
+};
 
 export default Select;

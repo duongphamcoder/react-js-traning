@@ -1,13 +1,13 @@
 import "./blogs.css";
 
 import Card, { CardProps } from "components/Card/Card";
-import Grid from "components/Grid/Grid";
+import Grid from "components/Grid";
 
 type BlogsProps = {
   data: CardProps[];
 };
 
-function Blogs(props: BlogsProps) {
+const Blogs = (props: BlogsProps) => {
   const { data } = props;
 
   return (
@@ -19,6 +19,6 @@ function Blogs(props: BlogsProps) {
       </Grid>
     </section>
   );
-}
+};
 
 export default Blogs;

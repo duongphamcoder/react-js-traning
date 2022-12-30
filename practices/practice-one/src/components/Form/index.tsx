@@ -1,7 +1,7 @@
-import Button from "components/Button/Button";
-import Heading from "components/Heading/Heading";
-import Input from "components/Input/Input";
-import { BlogPayload } from "context/Global/reducer";
+import Button from "components/Button";
+import Heading from "components/Heading";
+import Input from "components/Input";
+import { BlogPayload } from "contexts/App/reducer";
 import { ReactNode, FormEvent, ChangeEvent, MouseEvent } from "react";
 import "./form.css";
 type FormProps = {
@@ -28,7 +28,7 @@ const categorys = [
   },
 ];
 
-function Form(props: FormProps) {
+const Form = (props: FormProps) => {
   const { data, onChange, ...rest } = props;
   return (
     <form
@@ -74,6 +74,6 @@ function Form(props: FormProps) {
       </div>
     </form>
   );
-}
+};
 
 export default Form;

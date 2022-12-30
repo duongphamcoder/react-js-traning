@@ -8,12 +8,12 @@ type CardListProps = {
   };
 };
 
-function CardList(props: CardListProps) {
+const CardList = (props: CardListProps) => {
   return (
     <section className="card-list" style={props.customStyles || {}}>
       {props.children}
     </section>
   );
-}
+};
 
 export default CardList;

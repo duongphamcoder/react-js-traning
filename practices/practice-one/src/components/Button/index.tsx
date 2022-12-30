@@ -23,7 +23,7 @@ const buttonSize = {
   lg: "large",
 };
 
-function Button(props: ButtonProps) {
+const Button = (props: ButtonProps) => {
   const {
     title,
     tag = "button",
@@ -41,6 +41,6 @@ function Button(props: ButtonProps) {
       {children || title}
     </TagName>
   );
-}
+};
 
 export default Button;

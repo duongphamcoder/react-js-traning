@@ -1,17 +1,15 @@
-import Blogs from "components/Blogs/Blogs";
-import NewBlog from "components/NewBlog/NewBlog";
-import { blogs, data } from "constants/sample-data";
-import DefaultLayout from "layouts/DefaultLayout/DefaultLayout";
-import { useContext } from "react";
-import { GlobalContext } from "context/Global/globalContext";
+import Blogs from "components/Blogs";
+import NewBlog from "components/NewBlog";
+import { blogs, data } from "databases/sample-data";
+import DefaultLayout from "layouts/DefaultLayout";
 
-function BlogsPage() {
+const BlogsPage = () => {
   return (
     <DefaultLayout>
       <NewBlog data={data} />
       <Blogs data={blogs} />
     </DefaultLayout>
   );
-}
+};
 
 export default BlogsPage;

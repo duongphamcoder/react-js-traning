@@ -1,5 +1,5 @@
-import Button from "components/Button/Button";
-import Heading from "components/Heading/Heading";
+import Button from "components/Button";
+import Heading from "components/Heading";
 import { MouseEvent, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import "./card.css";
@@ -19,7 +19,7 @@ export type CardProps = {
   onEdit?: (event: MouseEvent) => void;
 };
 
-function Card(props: CardProps) {
+const Card = (props: CardProps) => {
   const {
     id,
     category = "",
@@ -55,6 +55,6 @@ function Card(props: CardProps) {
       </section>
     </Link>
   );
-}
+};
 
 export default Card;

@@ -1,4 +1,6 @@
+import { createContext, useReducer } from "react";
 import { CardProps } from "components/Card/Card";
+import { ActionParam } from "./reducer";
 
 export type StateParam = {
   uid: string;
@@ -22,4 +24,9 @@ export const initState: StateParam = {
   loading: false,
 };
 
-export default initState;
+const defaultDispath = (action: ActionParam) => { };
+
+export const AppContext = createContext<ReturnType<typeof useReducer>>([
+  initState,
+  defaultDispath,
+]);

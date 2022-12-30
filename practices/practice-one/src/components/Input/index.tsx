@@ -15,10 +15,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: (event: ChangeEvent) => void;
 }
 
-function Input(props: InputProps) {
+const Input = (props: InputProps) => {
   const { customStyle } = props;
 
   return <input className="input" {...props} style={customStyle} />;
-}
+};
 
 export default Input;

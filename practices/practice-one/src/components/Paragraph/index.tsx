@@ -5,9 +5,9 @@ type ParagraphProps = {
   content?: string;
 };
 
-function Paragraph(props: ParagraphProps) {
+const Paragraph = (props: ParagraphProps) => {
   const { children, content } = props;
   return <p className="paragraph">{children || content}</p>;
-}
+};
 
 export default Paragraph;

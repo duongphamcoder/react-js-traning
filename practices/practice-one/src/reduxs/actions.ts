@@ -1,6 +1,6 @@
 import { CardProps } from "components/Card/Card";
 import { ContextAction } from "constants/contextAction";
-import { ActionParam, BlogPayload } from "./reducer";
+import { ActionParam, BlogPayload } from "../contexts/App/reducer";
 
 export const setBlog = (data: BlogPayload): ActionParam => {
   return {

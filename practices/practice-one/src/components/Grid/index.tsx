@@ -7,7 +7,7 @@ type GridProps = {
   children?: ReactNode;
 };
 
-function Grid(props: GridProps) {
+const Grid = (props: GridProps) => {
   const { col, gap = 20, children } = props;
   const styles = {
     gridTemplateColumns: `repeat(${col}, 1fr)`,
@@ -19,6 +19,6 @@ function Grid(props: GridProps) {
       {children}
     </section>
   );
-}
+};
 
 export default Grid;

@@ -1,4 +1,4 @@
-import { StateParam } from "./initState";
+import { StateParam } from "./appContext";
 import { ContextAction } from "constants/contextAction";
 import { CardProps } from "components/Card/Card";
 

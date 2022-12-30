@@ -1,9 +1,9 @@
-import { GlobalContext } from "context/Global/globalContext";
+import { AppContext } from "contexts/App/appContext";
 import { useContext } from "react";
 
-function useStore() {
-  const [state, dispatch] = useContext(GlobalContext);
+const useStore = () => {
+  const [state, dispatch] = useContext(AppContext);
   return [state, dispatch];
-}
+};
 
 export default useStore;

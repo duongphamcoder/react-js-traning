@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "App";
 import "styles/main.css";
-import GlobalProvider from "context/Global/GlobalProvider";
+import AppProvider from "contexts/App/AppProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
-    <GlobalProvider>
+    <AppProvider>
       <App />
-    </GlobalProvider>
+    </AppProvider>
   </React.StrictMode>
 );

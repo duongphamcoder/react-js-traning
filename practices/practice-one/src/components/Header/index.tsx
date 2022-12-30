@@ -1,23 +1,22 @@
-import { Link } from "react-router-dom";
-import cinndy from "assets/images/Cinndy.jpg";
-import cector from "assets/icons/Vector.svg";
-import Heading from "components/Heading/Heading";
-import Button from "components/Button/Button";
-import Paragraph from "components/Paragraph/Paragraph";
-import Input from "components/Input/Input";
-import { navLinks } from "constants/navLinks";
-import Form from "components/Form/Form";
-import "./header.css";
 import { FormEvent, useState, MouseEvent, ChangeEvent } from "react";
-import Overlay from "components/Overlay/Overlay";
+import { Link } from "react-router-dom";
 import useStore from "hooks/useStore";
-import validation from "helpers/validation/empty";
+import Overlay from "components/Overlay";
+import Form from "components/Form";
+import Button from "components/Button";
+import Heading from "components/Heading";
+import Paragraph from "components/Paragraph";
+import cector from "assets/icons/vector.svg";
+import Input from "components/Input";
+import { navLinks } from "constants/navLinks";
 import firebaseService from "services/firebase";
-import { setBlog, setLoading } from "context/Global/actions";
-import { BlogPayload } from "context/Global/reducer";
+import { setBlog, setLoading } from "reduxs/actions";
 import { serverTimestamp } from "firebase/firestore";
+import cinndy from "assets/images/cinndy.jpg";
+import { validation } from "helpers/";
+import "./header.css";
 
-function Header() {
+const Header = () => {
   const [state, dispatch] = useStore();
   const [isShowForm, setIsShowForm] = useState(false);
 
@@ -136,6 +135,6 @@ function Header() {
       }
     </header>
   );
-}
+};
 
 export default Header;

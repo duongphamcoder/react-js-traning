@@ -6,7 +6,7 @@ type OverlayProps = {
   onClick?: (event: MouseEvent) => void;
 };
 
-function Overlay(props: OverlayProps) {
+const Overlay = (props: OverlayProps) => {
   return <section className="overlay" {...props} />;
-}
+};
 export default Overlay;
