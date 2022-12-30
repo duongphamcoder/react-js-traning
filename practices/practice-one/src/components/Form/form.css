@@ -5,6 +5,7 @@
   padding: 20px;
   font-family: var(--bs-primary-font);
   box-shadow: 0 0 10px 1px silver;
+  background-color: white;
 }
 
 .form .form-item {
