@@ -7,6 +7,7 @@ import Button from "components/Button";
 import Heading from "components/Heading";
 import Paragraph from "components/Paragraph";
 import Input from "components/Input";
+import Loading from "components/Loading";
 import { navLinks } from "constants/navLinks";
 import firebaseService from "services/firebase";
 import { setBlog, setLoading } from "reduxs/actions";
@@ -117,22 +118,7 @@ const Header = () => {
           <Form data={blog} onSubmit={handleSubmit} onChange={handleSetValueBlog} />
         </Overlay>
       )}
-
-      {
-        // TODO: update to late
-        loading && (
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              fontSize: "30px",
-              zIndex: "10000",
-            }}>
-            Loading.....
-          </div>
-        )
-      }
+      {loading && <Loading />}
     </header>
   );
 };
