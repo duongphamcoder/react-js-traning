@@ -1,3 +1,3 @@
 import axios from "axios";
 
-export const sendRequest = axios.create()
+export const sendRequest = axios.create();

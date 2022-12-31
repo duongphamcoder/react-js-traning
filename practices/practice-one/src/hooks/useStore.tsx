@@ -1,10 +1,10 @@
-import { AppContext } from "contexts/App/appContext";
-import { useContext } from "react";
+import { AppContext } from 'contexts/App/appContext';
+import { useContext } from 'react';
 
 const useStore = () => {
-  const [state, dispatch] = useContext(AppContext);
+    const [state, dispatch] = useContext(AppContext);
 
-  return [state, dispatch];
+    return [state, dispatch];
 };
 
 export default useStore;
