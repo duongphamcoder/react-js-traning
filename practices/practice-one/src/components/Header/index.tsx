@@ -11,7 +11,7 @@ import Loading from 'components/Loading';
 import { navLinks } from 'constants/navLinks';
 import { firebaseService, cloudinaryUpload } from 'services';
 import { setBlog, setLoading } from 'reduxs/actions';
-import { serverTimestamp } from 'firebase/firestore';
+import { Timestamp, serverTimestamp } from 'firebase/firestore';
 import { validation } from 'helpers';
 import { Collection } from 'constants/firebase';
 import cinndy from 'assets/images/cinndy.jpg';
@@ -40,7 +40,7 @@ const Header = () => {
                 ...blog,
                 image: data.public_id,
                 uid: state.uid,
-                createdAt: serverTimestamp(),
+                createdAt: Date.now(),
             };
             await firebaseService(Collection.BLOG).addData(payload);
             dispatch(setLoading(false));

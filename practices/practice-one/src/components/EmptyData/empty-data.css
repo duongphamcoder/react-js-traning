@@ -1,0 +1,10 @@
+.empty-data {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-data .paragraph {
+  font-size: 25px;
+}
