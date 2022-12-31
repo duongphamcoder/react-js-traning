@@ -8,10 +8,10 @@ import Heading from "components/Heading";
 import Paragraph from "components/Paragraph";
 import Input from "components/Input";
 import { navLinks } from "constants/navLinks";
-import firebaseService from "services/firebase";
+import { firebaseService, cloudinaryUpload } from "services";
 import { setBlog, setLoading } from "reduxs/actions";
 import { serverTimestamp } from "firebase/firestore";
-import { cloudinaryUpload, validation } from "helpers";
+import { validation } from "helpers";
 import { Collection } from "constants/firebase";
 import cinndy from "assets/images/cinndy.jpg";
 import cector from "assets/icons/vector.svg";
@@ -43,6 +43,13 @@ const Header = () => {
       };
       await firebaseService(Collection.BLOG).addData(payload);
       dispatch(setLoading(false));
+      dispatch(
+        setBlog({
+          image: "",
+          title: "",
+          category: "",
+        })
+      );
     } catch (error) {
       throw new Error(`${error}`);
     }
