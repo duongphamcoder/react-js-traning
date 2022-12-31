@@ -1,14 +1,14 @@
-import "./heading.css";
+import './heading.css';
 
 interface HeadingProps {
-  title: string;
-  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+    title: string;
+    tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 const Heading = (props: HeadingProps) => {
-  const { title, tag = "h2" } = props;
-  const TagName = tag;
+    const { title, tag = 'h2' } = props;
+    const TagName = tag;
 
-  return <TagName className="heading">{title}</TagName>;
+    return <TagName className="heading">{title}</TagName>;
 };
 
 export default Heading;
