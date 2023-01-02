@@ -10,7 +10,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { convertDate } from 'helpers';
 import useStore from 'hooks/useStore';
 import DefaultLayout from 'layouts/DefaultLayout';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { setBlogs, setLoading } from 'reduxs/actions';
 
 const BlogsPage = () => {

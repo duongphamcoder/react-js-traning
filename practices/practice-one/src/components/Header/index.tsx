@@ -16,6 +16,7 @@ import { Collection } from 'constants/firebase';
 import cinndy from 'assets/images/cinndy.jpg';
 import cector from 'assets/icons/vector.svg';
 import './header.css';
+import { SearchParams } from 'constants/searchParams';
 
 const Header = () => {
     const [state, dispatch] = useStore();
@@ -23,7 +24,7 @@ const Header = () => {
     const [isShowForm, setIsShowForm] = useState(false);
     const image = useRef<File>(new File([], ''));
     const { blog, loading } = state;
-    const currentCategory = searchParams.get('category') || '';
+    const currentCategory = searchParams.get(SearchParams.Category) || '';
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
