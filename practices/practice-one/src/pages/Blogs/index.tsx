@@ -4,6 +4,7 @@ import EmptyData from 'components/EmptyData';
 import NewBlog from 'components/NewBlog';
 import Paragraph from 'components/Paragraph';
 import { Collection } from 'constants/firebase';
+import { SearchParams } from 'constants/searchParams';
 import { firestore } from 'databases/firebase-config';
 import { data } from 'databases/sample-data';
 import { collection, onSnapshot } from 'firebase/firestore';
@@ -17,7 +18,7 @@ import { setBlogs, setLoading } from 'reduxs/actions';
 const BlogsPage = () => {
     const [state, dispatch] = useStore();
     const [searchParams, setSearchParams] = useSearchParams();
-    const category = searchParams.get('category');
+    const category = searchParams.get(SearchParams.Category);
     const currentCategory = category ? category.trim() : '';
     const { blogs } = state;
 
@@ -47,7 +48,7 @@ const BlogsPage = () => {
             }
         );
         return unsub;
-    }, []);
+    }, [currentCategory]);
 
     return (
         <DefaultLayout>
