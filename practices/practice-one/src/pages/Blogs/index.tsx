@@ -11,10 +11,14 @@ import { convertDate } from 'helpers';
 import useStore from 'hooks/useStore';
 import DefaultLayout from 'layouts/DefaultLayout';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { setBlogs, setLoading } from 'reduxs/actions';
 
 const BlogsPage = () => {
     const [state, dispatch] = useStore();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const category = searchParams.get('category');
+    const currentCategory = category ? category.trim() : '';
     const { blogs } = state;
 
     useEffect(() => {
