@@ -1,3 +1,3 @@
 export enum Collection {
-    BLOG = "blogs"
-};
+    BLOG = 'blogs',
+}

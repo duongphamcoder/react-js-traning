@@ -1,6 +1,6 @@
-import { StateParam } from "./appContext";
-import { ContextAction } from "constants/contextAction";
-import { CardProps } from "components/Card/Card";
+import { StateParam } from './appContext';
+import { ContextAction } from 'constants/contextAction';
+import { CardProps } from 'components/Card/Card';
 
 export type BlogPayload = {
   image: string;
@@ -25,7 +25,10 @@ const reducer: ReducerProps = (state: StateParam, action: ActionParam) => {
       };
     }
     case ContextAction.SET_USER: {
-      return state;
+      return {
+        ...state,
+        uid: action.payload as string
+      };
     }
     case ContextAction.SET_LOADING: {
       return {

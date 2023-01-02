@@ -9,8 +9,8 @@ type AppProviderProps = {
 
 const AppProvider = (props: AppProviderProps) => {
     const [state, dispatch] = useReducer(reducer, initState);
-
     const { children } = props;
+
     return (
         <AppContext.Provider value={[state, dispatch]}>
             {children}
