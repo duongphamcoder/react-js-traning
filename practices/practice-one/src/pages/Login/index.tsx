@@ -4,15 +4,22 @@ import useStore from 'hooks/useStore';
 import Button from 'components/Button';
 import Heading from 'components/Heading';
 import { auth } from 'databases/firebase-config';
-import { signInWithPopup } from 'firebase/auth';
-import { fbProvider } from 'helpers';
+import {
+    FacebookAuthProvider,
+    GoogleAuthProvider,
+    signInWithPopup,
+} from 'firebase/auth';
+import { fbProvider, ggAuthProvider } from 'helpers';
+
+type AuthProvider = FacebookAuthProvider | GoogleAuthProvider;
 
 const LoginPage = () => {
     const redirect = useNavigate();
     const [state, dispatch] = useStore();
     const { uid } = state;
-    const handleRedirect = async () => {
-        const { user } = await signInWithPopup(auth, fbProvider);
+
+    const handleLogin = async (authProvider: AuthProvider) => {
+        const { user } = await signInWithPopup(auth, authProvider);
         redirect('/');
     };
 
@@ -26,9 +33,16 @@ const LoginPage = () => {
                     <section className="login-btn">
                         <Button
                             title="Login with Facebook"
-                            onClick={handleRedirect}
+                            onClick={() => {
+                                handleLogin(fbProvider);
+                            }}
                         />
-                        <Button title="Login with Google" />
+                        <Button
+                            title="Login with Google"
+                            onClick={() => {
+                                handleLogin(ggAuthProvider);
+                            }}
+                        />
                     </section>
                 </>
             )}
