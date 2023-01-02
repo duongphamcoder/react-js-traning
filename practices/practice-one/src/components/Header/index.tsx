@@ -1,5 +1,5 @@
 import { FormEvent, useState, MouseEvent, ChangeEvent, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import useStore from 'hooks/useStore';
 import Overlay from 'components/Overlay';
 import Form from 'components/Form';
@@ -11,7 +11,6 @@ import Loading from 'components/Loading';
 import { navLinks } from 'constants/navLinks';
 import { firebaseService, cloudinaryUpload } from 'services';
 import { setBlog, setLoading } from 'reduxs/actions';
-import { Timestamp, serverTimestamp } from 'firebase/firestore';
 import { validation } from 'helpers';
 import { Collection } from 'constants/firebase';
 import cinndy from 'assets/images/cinndy.jpg';
@@ -20,10 +19,11 @@ import './header.css';
 
 const Header = () => {
     const [state, dispatch] = useStore();
+    const [searchParams, setSearchparams] = useSearchParams();
     const [isShowForm, setIsShowForm] = useState(false);
     const image = useRef<File>(new File([], ''));
-
     const { blog, loading } = state;
+    const currentCategory = searchParams.get('category') || '';
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
@@ -114,9 +114,20 @@ const Header = () => {
             </section>
             <section className="header-filter">
                 <nav className="header-navigation">
-                    {navLinks.map(({ title, path }, index) => (
-                        <Button tag="a" title={title} path={path} key={index} />
-                    ))}
+                    {navLinks.map(({ title, path }, index) => {
+                        const category = path ? `/blog?category=${path}` : '';
+                        const active = path.trim() === currentCategory.trim();
+
+                        return (
+                            <Button
+                                tag="a"
+                                title={title}
+                                path={category}
+                                key={index}
+                                active={active}
+                            />
+                        );
+                    })}
                 </nav>
                 <section className="header-filter-search">
                     <Input

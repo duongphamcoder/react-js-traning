@@ -16,6 +16,14 @@ const App = () => {
                     }
                 />
                 <Route
+                    path="/blog"
+                    element={
+                        <Authorization>
+                            <BlogsPage />
+                        </Authorization>
+                    }
+                />
+                <Route
                     path="/login"
                     element={
                         <Authorization>
