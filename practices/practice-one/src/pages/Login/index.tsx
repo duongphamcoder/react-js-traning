@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
 import useStore from 'hooks/useStore';
 import Button from 'components/Button';
 import Heading from 'components/Heading';
@@ -16,21 +16,22 @@ const LoginPage = () => {
         redirect('/');
     };
 
-    useLayoutEffect(() => {
-        if (uid) {
-            redirect('/', {
-                replace: true,
-            });
-        }
-    }, [state]);
-
     return (
         <section className="login">
-            <Heading title="Wellcome to Website" />
-            <section className="login-btn">
-                <Button title="Login with Facebook" onClick={handleRedirect} />
-                <Button title="Login with Google" />
-            </section>
+            {uid ? (
+                <Navigate to="/" replace={true} />
+            ) : (
+                <>
+                    <Heading title="Wellcome to Website" />
+                    <section className="login-btn">
+                        <Button
+                            title="Login with Facebook"
+                            onClick={handleRedirect}
+                        />
+                        <Button title="Login with Google" />
+                    </section>
+                </>
+            )}
         </section>
     );
 };

@@ -16,14 +16,6 @@ const App = () => {
                     }
                 />
                 <Route
-                    path="/:param"
-                    element={
-                        <Authorization>
-                            <BlogsPage />
-                        </Authorization>
-                    }
-                />
-                <Route
                     path="/login"
                     element={
                         <Authorization>
