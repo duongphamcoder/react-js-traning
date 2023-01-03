@@ -2,53 +2,57 @@ import Blogs from 'components/Blogs';
 import { CardProps } from 'components/Card/Card';
 import EmptyData from 'components/EmptyData';
 import NewBlog from 'components/NewBlog';
-import Paragraph from 'components/Paragraph';
 import { Collection } from 'constants/firebase';
-import { SearchParams } from 'constants/searchParams';
 import { firestore } from 'databases/firebase-config';
 import { data } from 'databases/sample-data';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { convertDate } from 'helpers';
 import useStore from 'hooks/useStore';
 import DefaultLayout from 'layouts/DefaultLayout';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { setBlogs, setLoading } from 'reduxs/actions';
 
 const BlogsPage = () => {
     const [state, dispatch] = useStore();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const category = searchParams.get(SearchParams.Category);
-    const currentCategory = category ? category.trim() : '';
+    const [searchParams] = useSearchParams();
     const { blogs } = state;
+
+    const createQueryConditions = () => {
+        const wheres = [];
+        for (const [key, value] of searchParams) {
+            wheres.push(where(key.trim(), '==', value.trim()));
+        }
+        return wheres;
+    };
 
     useEffect(() => {
         dispatch(setLoading(true));
-        const unsub = onSnapshot(
+        const q = query(
             collection(firestore, Collection.BLOG),
-            (doc) => {
-                const docs = doc.docs.map((item) => {
-                    const id = item.id;
-                    const { title, category, image, uid, createdAt } =
-                        item.data();
-                    const { date } = convertDate(createdAt);
-                    const cardItem: CardProps = {
-                        id,
-                        title,
-                        category,
-                        image: `${process.env.REACT_APP_CLOUD_SECURE_URL}/${image}`,
-                        isUser: uid === state.uid,
-                        path: `?category=${category}&blog_id=${id}`,
-                        timeStamp: date,
-                    };
-                    return cardItem;
-                });
-                dispatch(setBlogs(docs));
-                dispatch(setLoading(false));
-            }
+            ...createQueryConditions()
         );
+        const unsub = onSnapshot(q, (doc) => {
+            const docs = doc.docs.map((item) => {
+                const id = item.id;
+                const { title, category, image, uid, createdAt } = item.data();
+                const { date } = convertDate(createdAt);
+                const cardItem: CardProps = {
+                    id,
+                    title,
+                    category,
+                    image: `${process.env.REACT_APP_CLOUD_SECURE_URL}/${image}`,
+                    isUser: uid === state.uid,
+                    path: `?category=${category}&blog_id=${id}`,
+                    timeStamp: date,
+                };
+                return cardItem;
+            });
+            dispatch(setBlogs(docs));
+            dispatch(setLoading(false));
+        });
         return unsub;
-    }, [currentCategory]);
+    }, [searchParams, state.uid]);
 
     return (
         <DefaultLayout>
