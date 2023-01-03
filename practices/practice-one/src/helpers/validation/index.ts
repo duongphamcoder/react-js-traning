@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 type ValidationProps = {
     [key: string]: string
 };
@@ -15,7 +16,8 @@ type ValidateReturn = {
 };
 
 /**
- * - Used to check the values​according to the condition.
+ * - Used to check the values ​according to the condition.
+ // eslint-disable-next-line no-irregular-whitespace
  * @param object Contains keys as fields to be checked, values ​as data to be checked
  * @param regex Contains regular expressions, with the key being the corresponding data field to be checked
    the value will contain the regular expression and the message when there is an error

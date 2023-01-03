@@ -11,12 +11,13 @@ import Loading from 'components/Loading';
 import { navLinks } from 'constants/navLinks';
 import { firebaseService, cloudinaryUpload } from 'services';
 import { setBlog, setLoading } from 'reduxs/actions';
-import { validation } from 'helpers';
+import { getSearchParams, validation } from 'helpers';
 import { Collection } from 'constants/firebase';
 import cinndy from 'assets/images/cinndy.jpg';
 import cector from 'assets/icons/vector.svg';
 import './header.css';
 import { SearchParams } from 'constants/searchParams';
+import useDebounce from 'hooks/useDebounce';
 
 const Header = () => {
     const [state, dispatch] = useStore();
@@ -89,6 +90,16 @@ const Header = () => {
         );
     };
 
+    const debounce = useDebounce((value) => {
+        let search = getSearchParams(searchParams);
+        search['title'] = value;
+        if (!value) {
+            const { title, ...rest } = search;
+            search = rest;
+        }
+        setSearchparams(search);
+    });
+
     return (
         <header className="container">
             <section className="header-logo">
@@ -135,6 +146,7 @@ const Header = () => {
                         type="text"
                         name="filter"
                         placeholder="Give me a keyword..."
+                        onChange={debounce}
                     />
                 </section>
             </section>

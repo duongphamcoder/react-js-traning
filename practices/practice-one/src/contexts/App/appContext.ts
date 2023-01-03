@@ -1,6 +1,6 @@
-import { createContext, useReducer } from "react";
-import { CardProps } from "components/Card/Card";
-import { ActionParam } from "./reducer";
+import { createContext, useReducer } from 'react';
+import { CardProps } from 'components/Card/Card';
+import { ActionParam } from './reducer';
 
 export type StateParam = {
   uid: string;
@@ -14,17 +14,17 @@ export type StateParam = {
 };
 
 export const initState: StateParam = {
-  uid: "",
+  uid: '',
   blog: {
-    image: "",
-    title: "",
-    category: "",
+    image: '',
+    title: '',
+    category: '',
   },
   blogs: [],
   loading: false,
 };
 
-const defaultDispath = (action: ActionParam) => { };
+const defaultDispath = (action: ActionParam) => { return; };
 
 export const AppContext = createContext<ReturnType<typeof useReducer>>([
   initState,
