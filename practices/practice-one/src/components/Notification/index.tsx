@@ -1,7 +1,7 @@
 import './notification.css';
 
 export type Notofication = {
-    message?: string;
+    message: string;
     variant: 'success' | 'error';
 };
 
