@@ -41,7 +41,7 @@ const BlogsPage = () => {
                     id,
                     title,
                     category,
-                    image: `${process.env.REACT_APP_CLOUD_SECURE_URL}/${image}`,
+                    image: image,
                     isUser: uid === state.uid,
                     path: `?category=${category}&blog_id=${id}`,
                     timeStamp: date,

@@ -40,7 +40,7 @@ const Header = () => {
             const { data } = await cloudinaryUpload(image.current);
             const payload = {
                 ...blog,
-                image: data.public_id,
+                image: data.url,
                 uid: state.uid,
                 createdAt: Date.now(),
             };
