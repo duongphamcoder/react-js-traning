@@ -12,6 +12,9 @@ import useStore from 'hooks/useStore';
 import Loading from 'components/Loading';
 import { setLoading } from 'reduxs/actions';
 import { cloudinaryUpload } from 'services';
+import { Message, showNotification } from 'helpers/notification';
+import useNotification from 'hooks/useNotification';
+import { show } from 'reduxs/notificationAction';
 
 type BlogsProps = {
     data: CardProps[];
@@ -27,6 +30,7 @@ const Blogs = (props: BlogsProps) => {
     const [isShowForm, setIsShowForm] = useState(false);
     const [dataForm, setDataForm] = useState<BlogPayload>(defaultDataForm);
     const [state, dispatch] = useStore();
+    const [notify, dispatchNotify] = useNotification();
     const image = useRef<File>(new File([], ''));
     const { data } = props;
     const { loading } = state;
@@ -58,22 +62,33 @@ const Blogs = (props: BlogsProps) => {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        dispatch(setLoading(true));
-        const fileName = image.current.name;
-        let payload = {
-            ...dataForm,
-            createdAt: Date.now(),
-        };
-        if (fileName) {
-            const { data } = await cloudinaryUpload(image.current);
-            payload = {
-                ...payload,
-                image: data.url as string,
+        try {
+            dispatch(setLoading(true));
+            const fileName = image.current.name;
+            let payload = {
+                ...dataForm,
+                createdAt: Date.now(),
             };
+            if (fileName) {
+                const { data } = await cloudinaryUpload(image.current);
+                payload = {
+                    ...payload,
+                    image: data.url as string,
+                };
+            }
+            await updateDoc(doc(firestore, Collection.BLOG, blogId), payload);
+            dispatch(setLoading(false));
+            closeForm();
+        } catch (error) {
+            showNotification(error as Message, (message) => {
+                dispatch(
+                    show({
+                        message,
+                        variant: 'error',
+                    })
+                );
+            });
         }
-        await updateDoc(doc(firestore, Collection.BLOG, blogId), payload);
-        dispatch(setLoading(false));
-        closeForm();
     };
 
     const handleSetValueBlog = (event: ChangeEvent) => {

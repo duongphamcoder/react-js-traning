@@ -1,8 +1,9 @@
+import { NotificationMessage } from 'constants/notification';
 import { firestore } from 'databases/firebase-config';
 import { addDoc, collection } from 'firebase/firestore';
 
 type FirebasePayload = {
-  [key: string]: any;
+  [key: string]: string | number | boolean;
 };
 
 const firebaseService = (collectionPr: string) => {
@@ -14,7 +15,9 @@ const firebaseService = (collectionPr: string) => {
         });
         return result;
       } catch (error) {
-        throw new Error('Unachievable');
+        return Promise.reject({
+          message: NotificationMessage.SEND_REQUSET_FAILED
+        });
       }
     },
   };

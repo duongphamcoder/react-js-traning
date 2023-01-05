@@ -18,9 +18,14 @@ import cector from 'assets/icons/vector.svg';
 import './header.css';
 import { SearchParams } from 'constants/searchParams';
 import useDebounce from 'hooks/useDebounce';
+import useNotification from 'hooks/useNotification';
+import { show } from 'reduxs/notificationAction';
+import { NotificationMessage } from 'constants/notification';
+import { Message, showNotification } from 'helpers/notification';
 
 const Header = () => {
     const [state, dispatch] = useStore();
+    const [notify, dispatchNotify] = useNotification();
     const [searchParams, setSearchparams] = useSearchParams();
     const [isShowForm, setIsShowForm] = useState(false);
     const image = useRef<File>(new File([], ''));
@@ -46,6 +51,12 @@ const Header = () => {
             };
             await firebaseService(Collection.BLOG).addData(payload);
             dispatch(setLoading(false));
+            dispatchNotify(
+                show({
+                    message: NotificationMessage.ADD_BLOG_SUCCESS,
+                    variant: 'success',
+                })
+            );
             dispatch(
                 setBlog({
                     image: '',
@@ -54,7 +65,14 @@ const Header = () => {
                 })
             );
         } catch (error) {
-            throw new Error(`${error}`);
+            showNotification(error as Message, (message) => {
+                dispatchNotify(
+                    show({
+                        message,
+                        variant: 'error',
+                    })
+                );
+            });
         }
     };
 

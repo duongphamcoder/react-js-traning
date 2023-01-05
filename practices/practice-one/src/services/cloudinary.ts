@@ -1,10 +1,12 @@
+import { NotificationMessage } from 'constants/notification';
 import { sendRequest } from 'helpers';
 
 type CloudResponse = {
     error: boolean;
     data: {
         [key: string]: string | number;
-    }
+    },
+    message: string
 }
 
 export const cloudinaryUpload = async (file: File): Promise<CloudResponse> => {
@@ -18,13 +20,15 @@ export const cloudinaryUpload = async (file: File): Promise<CloudResponse> => {
         const { public_id, url } = response.data;
         const resolveValue = {
             error: false,
-            data: { public_id, url }
+            data: { public_id, url },
+            message: NotificationMessage.SEND_REQUSET_SUCCESS
         };
         return Promise.resolve(resolveValue);
     }
     const rejectValue = {
         error: true,
-        data: {}
+        data: {},
+        message: NotificationMessage.SEND_REQUSET_FAILED
     };
     return Promise.reject(rejectValue);
 };
