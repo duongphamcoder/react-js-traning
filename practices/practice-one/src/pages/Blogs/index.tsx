@@ -30,7 +30,7 @@ const BlogsPage = () => {
         dispatch(setLoading(true));
         const q = query(
             collection(firestore, Collection.BLOG),
-            orderBy('createdAt', 'asc')
+            orderBy('createdAt', 'desc')
         );
         const unsub = onSnapshot(q, (doc) => {
             const docs = doc.docs.map((item) => {

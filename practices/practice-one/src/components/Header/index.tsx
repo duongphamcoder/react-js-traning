@@ -1,5 +1,5 @@
 import { FormEvent, useState, MouseEvent, ChangeEvent, useRef } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import useStore from 'hooks/useStore';
 import { navLinks } from 'constants/navLinks';
 import { firebaseService, cloudinaryUpload } from 'services';
@@ -32,9 +32,10 @@ const Header = () => {
     const [state, dispatch] = useStore();
     const [notify, dispatchNotify] = useNotification();
     const [searchParams, setSearchparams] = useSearchParams();
+    const redirect = useNavigate();
     const [isShowForm, setIsShowForm] = useState(false);
     const image = useRef<File>(new File([], ''));
-    const { blog, loading } = state;
+    const { blog, loading, uid } = state;
     const currentCategory = searchParams.get(SearchParams.Category) || '';
 
     const handleSubmit = async (event: FormEvent) => {
@@ -142,7 +143,11 @@ const Header = () => {
                         title="New blog"
                         size="md"
                         onClick={(event: MouseEvent) => {
-                            setIsShowForm(true);
+                            if (uid) {
+                                setIsShowForm(true);
+                                return;
+                            }
+                            redirect('/login');
                         }}
                     />
                 </section>
