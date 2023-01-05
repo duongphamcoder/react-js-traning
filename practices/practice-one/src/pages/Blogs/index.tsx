@@ -48,6 +48,7 @@ const BlogsPage = () => {
                 };
                 return cardItem;
             });
+
             dispatch(setBlogs(docs));
             dispatch(setLoading(false));
         });

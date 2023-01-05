@@ -1,11 +1,11 @@
 import './notification.css';
 
-export type Notofication = {
+export type NotificationProps = {
     message: string;
     variant: 'success' | 'error';
 };
 
-const Notofication = (props: Notofication) => {
+const Notification = (props: NotificationProps) => {
     const { message, variant } = props;
     return (
         <section className={`notification-wrapper ${variant}`}>
@@ -15,4 +15,4 @@ const Notofication = (props: Notofication) => {
     );
 };
 
-export default Notofication;
+export default Notification;

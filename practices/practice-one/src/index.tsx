@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from 'App';
 import 'styles/main.css';
 import AppProvider from 'contexts/App/AppProvider';
+import NotificationProvider from 'contexts/Notification/NotificationProvider';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -10,7 +11,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <AppProvider>
-            <App />
+            <NotificationProvider>
+                <App />
+            </NotificationProvider>
         </AppProvider>
     </React.StrictMode>
 );

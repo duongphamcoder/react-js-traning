@@ -10,27 +10,28 @@
   border-radius: 5px;
   color: white;
   animation: slideDown 0.8s linear;
+  z-index: 99999;
 }
 
-.message-wrapper.error {
+.notification-wrapper.error {
   background-color: red;
 }
 
-.message-wrapper.success {
+.notification-wrapper.success {
   background-color: green;
 }
 
-.message-wrapper .title {
+.notification-wrapper .title {
   line-height: 23px;
 }
 
-.message-wrapper .icon {
+.notification-wrapper .icon {
   align-self: center;
   justify-self: center;
   font-size: 24px;
   cursor: pointer;
 }
 
-.message-wrapper .icon:hover {
+.notification-wrapper .icon:hover {
   opacity: 0.7;
 }
