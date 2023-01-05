@@ -15,6 +15,8 @@ import { cloudinaryUpload } from 'services';
 import { Message, showNotification } from 'helpers/notification';
 import useNotification from 'hooks/useNotification';
 import { show } from 'reduxs/notificationAction';
+import { clearMessage, showMessage, validation } from 'helpers';
+import { NotificationMessage } from 'constants/notification';
 
 type BlogsProps = {
     data: CardProps[];
@@ -63,12 +65,17 @@ const Blogs = (props: BlogsProps) => {
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
         try {
-            dispatch(setLoading(true));
             const fileName = image.current.name;
             let payload = {
                 ...dataForm,
-                createdAt: Date.now(),
             };
+            const { dataFields, error } = validation(payload);
+            clearMessage();
+            if (error) {
+                showMessage(dataFields);
+                return;
+            }
+            dispatch(setLoading(true));
             if (fileName) {
                 const { data } = await cloudinaryUpload(image.current);
                 payload = {
@@ -76,12 +83,21 @@ const Blogs = (props: BlogsProps) => {
                     image: data.url as string,
                 };
             }
-            await updateDoc(doc(firestore, Collection.BLOG, blogId), payload);
+            await updateDoc(doc(firestore, Collection.BLOG, blogId), {
+                ...payload,
+                createdAt: Date.now(),
+            });
             dispatch(setLoading(false));
+            dispatchNotify(
+                show({
+                    message: NotificationMessage.UPDATE_BLOG_SUCCESS,
+                    variant: 'success',
+                })
+            );
             closeForm();
         } catch (error) {
             showNotification(error as Message, (message) => {
-                dispatch(
+                dispatchNotify(
                     show({
                         message,
                         variant: 'error',

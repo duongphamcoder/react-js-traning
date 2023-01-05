@@ -1,6 +1,22 @@
 import { FormEvent, useState, MouseEvent, ChangeEvent, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import useStore from 'hooks/useStore';
+import { navLinks } from 'constants/navLinks';
+import { firebaseService, cloudinaryUpload } from 'services';
+import { setBlog, setLoading } from 'reduxs/actions';
+import {
+    getSearchParams,
+    validation,
+    clearMessage,
+    showMessage,
+} from 'helpers';
+import { Collection } from 'constants/firebase';
+import { SearchParams } from 'constants/searchParams';
+import useDebounce from 'hooks/useDebounce';
+import useNotification from 'hooks/useNotification';
+import { show } from 'reduxs/notificationAction';
+import { NotificationMessage } from 'constants/notification';
+import { Message, showNotification } from 'helpers/notification';
 import Overlay from 'components/Overlay';
 import Form from 'components/Form';
 import Button from 'components/Button';
@@ -8,20 +24,9 @@ import Heading from 'components/Heading';
 import Paragraph from 'components/Paragraph';
 import Input from 'components/Input';
 import Loading from 'components/Loading';
-import { navLinks } from 'constants/navLinks';
-import { firebaseService, cloudinaryUpload } from 'services';
-import { setBlog, setLoading } from 'reduxs/actions';
-import { getSearchParams, validation } from 'helpers';
-import { Collection } from 'constants/firebase';
 import cinndy from 'assets/images/cinndy.jpg';
 import cector from 'assets/icons/vector.svg';
 import './header.css';
-import { SearchParams } from 'constants/searchParams';
-import useDebounce from 'hooks/useDebounce';
-import useNotification from 'hooks/useNotification';
-import { show } from 'reduxs/notificationAction';
-import { NotificationMessage } from 'constants/notification';
-import { Message, showNotification } from 'helpers/notification';
 
 const Header = () => {
     const [state, dispatch] = useStore();
@@ -36,9 +41,9 @@ const Header = () => {
         event.preventDefault();
         try {
             const { dataFields, error } = validation(blog);
+            clearMessage();
             if (error) {
-                // TODO: I will add the error message later
-                alert('Error');
+                showMessage(dataFields);
                 return;
             }
             dispatch(setLoading(true));
@@ -50,13 +55,13 @@ const Header = () => {
                 createdAt: Date.now(),
             };
             await firebaseService(Collection.BLOG).addData(payload);
-            dispatch(setLoading(false));
             dispatchNotify(
                 show({
                     message: NotificationMessage.ADD_BLOG_SUCCESS,
                     variant: 'success',
                 })
             );
+            dispatch(setLoading(false));
             dispatch(
                 setBlog({
                     image: '',
