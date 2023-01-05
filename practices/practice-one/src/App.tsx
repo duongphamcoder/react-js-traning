@@ -1,6 +1,7 @@
 import Authorization from 'helpers/firebase/Authorization';
 import BlogsPage from 'pages/Blogs';
 import LoginPage from 'pages/Login';
+import LoginOut from 'pages/Logout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
@@ -28,6 +29,14 @@ const App = () => {
                     element={
                         <Authorization>
                             <LoginPage />
+                        </Authorization>
+                    }
+                />
+                <Route
+                    path="/logout"
+                    element={
+                        <Authorization>
+                            <LoginOut />
                         </Authorization>
                     }
                 />
