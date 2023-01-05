@@ -9,6 +9,11 @@ type CloudResponse = {
     message: string
 }
 
+/**
+ * - Processing sending images to cloudinary
+ * @param file 
+ * @returns 
+ */
 export const cloudinaryUpload = async (file: File): Promise<CloudResponse> => {
     const formData = new FormData();
     formData.append('file', file);

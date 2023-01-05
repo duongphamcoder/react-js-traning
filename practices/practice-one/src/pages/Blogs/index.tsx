@@ -4,14 +4,7 @@ import EmptyData from 'components/EmptyData';
 import NewBlog from 'components/NewBlog';
 import { Collection } from 'constants/firebase';
 import { firestore } from 'databases/firebase-config';
-import { data } from 'databases/sample-data';
-import {
-    collection,
-    onSnapshot,
-    orderBy,
-    query,
-    where,
-} from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { convertDate } from 'helpers';
 import useStore from 'hooks/useStore';
 import DefaultLayout from 'layouts/DefaultLayout';
@@ -26,6 +19,10 @@ const BlogsPage = () => {
     const [dataBlogs, setDataBlogs] = useState<CardProps[]>([]);
     const [feature, setFeature] = useState<CardProps>();
 
+    /**
+     * - Do get data from firebase
+     * - And will make the callback when user login
+     */
     useEffect(() => {
         dispatch(setLoading(true));
         const q = query(
@@ -33,69 +30,58 @@ const BlogsPage = () => {
             orderBy('createdAt', 'desc')
         );
         const unsub = onSnapshot(q, (doc) => {
-            const docs = doc.docs.map((item) => {
+            let firstBlog: CardProps = {} as CardProps;
+            const docs = doc.docs.map((item, index) => {
                 const id = item.id;
                 const { title, category, image, uid, createdAt } = item.data();
-                const { date } = convertDate(createdAt);
+                const { date, time } = convertDate(createdAt);
                 const cardItem: CardProps = {
                     id,
                     title,
                     category,
-                    image: image,
+                    image,
                     isUser: uid === state.uid,
                     path: `?category=${category}&blog_id=${id}`,
                     timeStamp: date,
                 };
+                if (index === 0) {
+                    firstBlog = {
+                        ...cardItem,
+                        category: '',
+                        timeStamp: `${time} - ${date}`,
+                    };
+                }
                 return cardItem;
             });
-            if (docs.length) {
-                const firstBlog = doc.docs[0];
-                const { title, image, category, uid, createdAt } =
-                    firstBlog.data();
-                const { date, time } = convertDate(createdAt);
-                setFeature({
-                    id: firstBlog.id,
-                    title,
-                    image,
-                    path: `?category=${category}&blog_id=${firstBlog.id}`,
-                    timeStamp: `${time} - ${date}`,
-                    isUser: uid === state.uid,
-                });
-            }
-
+            setFeature(firstBlog);
             dispatch(setBlogs(docs));
             dispatch(setLoading(false));
         });
+
         return unsub;
     }, [state.uid]);
 
+    /**
+     * - Filter blogs by param
+     */
     useEffect(() => {
-        const category = searchParams.get('category')?.trim();
-        const title = searchParams.get('title')?.trim();
+        let category: string = searchParams.get('category')?.trim() as string;
+        category = category ? category.trim() : '';
+        let title: string = searchParams.get('title')?.trim() as string;
+        title = title ? title.trim() : '';
         let newBlogs: CardProps[] = blogs;
-        if (category) {
-            newBlogs = newBlogs.filter(
-                (blog) => blog.category === category && blog.title.includes('')
+        newBlogs = newBlogs.filter((blog) => {
+            return (
+                blog.category?.includes(category) && blog.title?.includes(title)
             );
-        }
-        if (title) {
-            newBlogs = newBlogs.filter((blog) => {
-                return blog.title.toLowerCase().includes(title.toLowerCase());
-            });
-        }
+        });
         setDataBlogs(newBlogs);
     }, [searchParams, blogs]);
 
     return (
         <DefaultLayout>
-            {dataBlogs.length ? (
-                <>
-                    <NewBlog data={feature as CardProps} />
-                    <Blogs data={dataBlogs} />
-                </>
-            ) : (
-                <EmptyData />
-            )}
+            {feature && <NewBlog data={feature as CardProps} />}
+            {dataBlogs.length ? <Blogs data={dataBlogs} /> : <EmptyData />}
         </DefaultLayout>
     );
 };

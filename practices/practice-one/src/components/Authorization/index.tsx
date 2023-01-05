@@ -3,7 +3,6 @@ import { ReactNode, useEffect } from 'react';
 import { auth } from 'databases/firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { setUid } from 'reduxs/actions';
-import { useNavigate } from 'react-router-dom';
 
 type AuthorizationProps = {
     children?: ReactNode;
@@ -11,8 +10,11 @@ type AuthorizationProps = {
 
 const Authorization = (props: AuthorizationProps) => {
     const [state, dispatch] = useStore();
-    const redirect = useNavigate();
     const { children } = props;
+
+    /**
+     * - Listen to the event about authorization
+     */
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
             if (user) {

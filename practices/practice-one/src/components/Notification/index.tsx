@@ -7,6 +7,7 @@ export type NotificationProps = {
 
 const Notification = (props: NotificationProps) => {
     const { message, variant } = props;
+
     return (
         <section className={`notification-wrapper ${variant}`}>
             <p className="title">{message}</p>

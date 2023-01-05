@@ -9,6 +9,7 @@ import {
     validation,
     clearMessage,
     showMessage,
+    handleChangeValueForm,
 } from 'helpers';
 import { Collection } from 'constants/firebase';
 import { SearchParams } from 'constants/searchParams';
@@ -38,6 +39,11 @@ const Header = () => {
     const { blog, loading, uid } = state;
     const currentCategory = searchParams.get(SearchParams.Category) || '';
 
+    /**
+     * - Add a blog
+     * @param event Form event
+     * @returns
+     */
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
         try {
@@ -82,6 +88,10 @@ const Header = () => {
         }
     };
 
+    /**
+     * - Close the form
+     * @param event MouseEvent
+     */
     const closeForm = (event: MouseEvent) => {
         setIsShowForm(false);
         dispatch(
@@ -93,27 +103,24 @@ const Header = () => {
         );
     };
 
+    /**
+     * - Handling data changes in forms
+     * @param event ChangeEvent
+     */
     const handleSetValueBlog = (event: ChangeEvent) => {
-        type InputType = HTMLInputElement | HTMLSelectElement;
-        const element: InputType = event.target as InputType;
-        const key: string = element.name;
-        let value: string = element.value;
-        if (element.type === 'file') {
-            const fileElement: HTMLInputElement = element as HTMLInputElement;
-            const file = fileElement.files
-                ? fileElement.files[0]
-                : new File([], 'default.jpg');
-            value = URL.createObjectURL(file);
-            image.current = file;
-        }
-        dispatch(
-            setBlog({
-                ...blog,
-                [key]: value,
-            })
-        );
+        handleChangeValueForm(event, image, (key, value) => {
+            dispatch(
+                setBlog({
+                    ...blog,
+                    [key]: value,
+                })
+            );
+        });
     };
 
+    /**
+     * - Processing blog search
+     */
     const debounce = useDebounce((value) => {
         let search = getSearchParams(searchParams);
         search['title'] = value;

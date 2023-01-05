@@ -1,4 +1,4 @@
-import Authorization from 'helpers/firebase/Authorization';
+import Authorization from 'components/Authorization';
 import BlogsPage from 'pages/Blogs';
 import LoginPage from 'pages/Login';
 import LoginOut from 'pages/Logout';

@@ -1,4 +1,4 @@
 export enum Status {
-    SUCCESS = "Send request successful",
-    FAILED = "Send request failed"
+    SUCCESS = 'Send request successful',
+    FAILED = 'Send request failed'
 }

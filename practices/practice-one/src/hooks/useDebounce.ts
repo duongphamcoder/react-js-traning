@@ -2,6 +2,11 @@ import { useRef, ChangeEvent } from 'react';
 
 type DebounceProps = (value: string) => void;
 
+/**
+ * - This is a custom hook that listens for user input
+ * @param callback 
+ * @returns 
+ */
 const useDebounce = (callback: DebounceProps) => {
     const refTime = useRef<ReturnType<typeof setTimeout>>();
     const debounce = (event: ChangeEvent) => {

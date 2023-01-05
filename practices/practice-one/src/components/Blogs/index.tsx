@@ -1,12 +1,7 @@
 import { useState, useRef, ChangeEvent, MouseEvent, FormEvent } from 'react';
-import { deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from 'databases/firebase-config';
 import { Collection } from 'constants/firebase';
-import Grid from 'components/Grid';
-import Card, { CardProps } from 'components/Card/Card';
-import './blogs.css';
-import Overlay from 'components/Overlay';
-import Form from 'components/Form';
 import { BlogPayload } from 'contexts/App/reducer';
 import useStore from 'hooks/useStore';
 import Loading from 'components/Loading';
@@ -15,8 +10,18 @@ import { cloudinaryUpload } from 'services';
 import { Message, showNotification } from 'helpers/notification';
 import useNotification from 'hooks/useNotification';
 import { show } from 'reduxs/notificationAction';
-import { clearMessage, showMessage, validation } from 'helpers';
+import {
+    clearMessage,
+    handleChangeValueForm,
+    showMessage,
+    validation,
+} from 'helpers';
 import { NotificationMessage } from 'constants/notification';
+import Grid from 'components/Grid';
+import Card, { CardProps } from 'components/Card/Card';
+import './blogs.css';
+import Overlay from 'components/Overlay';
+import Form from 'components/Form';
 
 type BlogsProps = {
     data: CardProps[];
@@ -37,10 +42,31 @@ const Blogs = (props: BlogsProps) => {
     const { data } = props;
     const { loading } = state;
 
+    /**
+     * - Process of deleting blogs
+     * @param blog_id id of blog to delete
+     */
     const handleDeleteBlog = async (blog_id: string) => {
         const value = confirm('Are you sure, you want to delete');
-        if (value) {
-            await deleteDoc(doc(firestore, Collection.BLOG, blog_id));
+        try {
+            if (value) {
+                await deleteDoc(doc(firestore, Collection.BLOG, blog_id));
+                dispatchNotify(
+                    show({
+                        message: NotificationMessage.DELETE_BLOG_SUCCESS,
+                        variant: 'success',
+                    })
+                );
+            }
+        } catch (error) {
+            showNotification(error as Message, (message) => {
+                dispatchNotify(
+                    show({
+                        message,
+                        variant: 'error',
+                    })
+                );
+            });
         }
     };
 
@@ -62,6 +88,11 @@ const Blogs = (props: BlogsProps) => {
         setIsShowForm(true);
     };
 
+    /**
+     * - Handle update form submission
+     * @param event FormEvent
+     * @returns
+     */
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
         try {
@@ -107,24 +138,18 @@ const Blogs = (props: BlogsProps) => {
         }
     };
 
+    /**
+     * - Handling data changes in forms
+     * @param event ChangeEvent
+     */
     const handleSetValueBlog = (event: ChangeEvent) => {
-        type InputType = HTMLInputElement | HTMLSelectElement;
-        const element: InputType = event.target as InputType;
-        const key: string = element.name;
-        let value: string = element.value;
-        if (element.type === 'file') {
-            const fileElement: HTMLInputElement = element as HTMLInputElement;
-            const file = fileElement.files
-                ? fileElement.files[0]
-                : new File([], 'default.jpg');
-            value = URL.createObjectURL(file);
-            image.current = file;
-        }
-        setDataForm((prev) => {
-            return {
-                ...prev,
-                [key]: value,
-            };
+        handleChangeValueForm(event, image, (key, value) => {
+            setDataForm((prev) => {
+                return {
+                    ...prev,
+                    [key]: value,
+                };
+            });
         });
     };
 

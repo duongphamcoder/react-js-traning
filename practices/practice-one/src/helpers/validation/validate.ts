@@ -27,8 +27,9 @@ export const validation = (object: ValidationProps, regex?: RegexProps): Validat
     let dataFields = {};
     let error = false;
     Object.entries(object).forEach(([key, value]) => {
-        if (value && regex) {
-            const matches = value.match(regex[key].check);
+        const newValue = value.trim();
+        if (newValue && regex) {
+            const matches = newValue.match(regex[key].check);
             if (!matches) {
                 dataFields = {
                     ...dataFields,
@@ -37,7 +38,7 @@ export const validation = (object: ValidationProps, regex?: RegexProps): Validat
                 error = true;
             }
         }
-        else if (!value) {
+        else if (!newValue) {
             error = true;
             dataFields = {
                 ...dataFields,
@@ -51,6 +52,10 @@ export const validation = (object: ValidationProps, regex?: RegexProps): Validat
     };
 };
 
+/**
+ * - Display an error message when the user enters it incorrectly
+ * @param object 
+ */
 export const showMessage = (object: ValidationProps) => {
     Object.entries(object).forEach(([key, value]) => {
         const formItem: HTMLDivElement = document.querySelector(
@@ -61,6 +66,9 @@ export const showMessage = (object: ValidationProps) => {
     });
 };
 
+/**
+ * - Remove error messages after user has updated
+ */
 export const clearMessage = () => {
     const errors = document.querySelectorAll('.form-item.error');
     errors.forEach(el => el.classList.remove('error'));

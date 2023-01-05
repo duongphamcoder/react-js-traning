@@ -34,26 +34,28 @@ const Card = (props: CardProps) => {
     } = props;
 
     return (
-        <Link to={path} className="card" {...rest}>
-            <section className="card-image">
-                <img src={image} alt={title} />
-            </section>
-            <section className="card-details">
-                <Heading title={category} tag="h3" />
-                <p className="card-details-time">{timeStamp}</p>
-                <Heading title={title} />
-                {isUser && (
-                    <section className="card-control">
-                        <Button onClick={onDelete}>
-                            <img src={bntDelete} alt="Button remove" />
-                        </Button>
-                        <Button onClick={onEdit}>
-                            <img src={bntEdit} alt="Button edit" />
-                        </Button>
-                    </section>
-                )}
-            </section>
-        </Link>
+        <section className="card-wrapper">
+            <Link to={path} className="card" {...rest}>
+                <section className="card-image">
+                    <img src={image} alt={title} />
+                </section>
+                <section className="card-details">
+                    <Heading title={category} tag="h3" />
+                    <p className="card-details-time">{timeStamp}</p>
+                    <Heading title={title} />
+                    {isUser && (
+                        <section className="card-control">
+                            <Button onClick={onDelete}>
+                                <img src={bntDelete} alt="Button remove" />
+                            </Button>
+                            <Button onClick={onEdit}>
+                                <img src={bntEdit} alt="Button edit" />
+                            </Button>
+                        </section>
+                    )}
+                </section>
+            </Link>
+        </section>
     );
 };
 

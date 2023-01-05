@@ -5,6 +5,11 @@ type ConvertDate = {
     date: string
 }
 
+/**
+ * - Convert from number to date
+ * @param date Date
+ * @returns { ConvertDate }
+ */
 const convertDate = (date: Date): ConvertDate => {
     const parseDate = new Date(date);
     const month = parseDate.getMonth();
