@@ -4,7 +4,6 @@ import { firestore } from 'databases/firebase-config';
 import { Collection } from 'constants/firebase';
 import { BlogPayload } from 'contexts/App/reducer';
 import useStore from 'hooks/useStore';
-import Loading from 'components/Loading';
 import { setLoading } from 'reduxs/actions';
 import { cloudinaryUpload } from 'services';
 import { Message, showNotification } from 'helpers/notification';
@@ -40,7 +39,6 @@ const Blogs = (props: BlogsProps) => {
     const [notify, dispatchNotify] = useNotification();
     const image = useRef<File>(new File([], ''));
     const { data } = props;
-    const { loading } = state;
 
     /**
      * - Process of deleting blogs
@@ -180,7 +178,6 @@ const Blogs = (props: BlogsProps) => {
                     />
                 </Overlay>
             )}
-            {loading && <Loading />}
         </section>
     );
 };

@@ -17,7 +17,9 @@ const BlogsPage = () => {
     const { blogs } = state;
     const [searchParams] = useSearchParams();
     const [dataBlogs, setDataBlogs] = useState<CardProps[]>([]);
-    const [feature, setFeature] = useState<CardProps>();
+    const [feature, setFeature] = useState<
+        CardProps | { [key: string]: string }
+    >({});
 
     /**
      * - Do get data from firebase
@@ -80,7 +82,9 @@ const BlogsPage = () => {
 
     return (
         <DefaultLayout>
-            {feature && <NewBlog data={feature as CardProps} />}
+            {Boolean(Object.keys(feature).length) && (
+                <NewBlog data={feature as CardProps} />
+            )}
             {dataBlogs.length ? <Blogs data={dataBlogs} /> : <EmptyData />}
         </DefaultLayout>
     );

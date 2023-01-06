@@ -24,7 +24,6 @@ import Button from 'components/Button';
 import Heading from 'components/Heading';
 import Paragraph from 'components/Paragraph';
 import Input from 'components/Input';
-import Loading from 'components/Loading';
 import cinndy from 'assets/images/cinndy.jpg';
 import cector from 'assets/icons/vector.svg';
 import './header.css';
@@ -36,7 +35,7 @@ const Header = () => {
     const redirect = useNavigate();
     const [isShowForm, setIsShowForm] = useState(false);
     const image = useRef<File>(new File([], ''));
-    const { blog, loading, uid } = state;
+    const { blog, uid } = state;
     const currentCategory = searchParams.get(SearchParams.Category) || '';
 
     /**
@@ -194,7 +193,6 @@ const Header = () => {
                     />
                 </Overlay>
             )}
-            {loading && <Loading />}
         </header>
     );
 };

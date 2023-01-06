@@ -1,26 +1,26 @@
 export const categorys = [
     {
         name: 'HTML/CSS',
-        id: 'html-css',
+        id: 'HTML-CSS',
     },
     {
         name: 'JavaScript',
-        id: 'javascript',
+        id: 'JavaScript',
     },
     {
         name: 'NodeJS',
-        id: 'node-js',
+        id: 'Node-Js',
     },
     {
         name: 'AI',
-        id: 'ai',
+        id: 'Ai',
     },
     {
         name: 'ReactJS',
-        id: 'react-js',
+        id: 'React-Js',
     },
     {
         name: 'VueJS',
-        id: 'vue-js',
+        id: 'Vue-Js',
     },
 ];
