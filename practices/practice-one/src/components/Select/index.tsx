@@ -9,6 +9,7 @@ type SelectProps = {
 
 const Select = (props: SelectProps) => {
     const { data, value = '', ...rest } = props;
+
     return (
         <select value={value} {...rest} className="select-option">
             {data.map((item, index) => {
