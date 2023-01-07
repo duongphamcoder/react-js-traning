@@ -59,3 +59,34 @@
   border-radius: 5px;
   text-transform: uppercase;
 }
+
+.form-item.error {
+  position: relative;
+}
+
+.form-item.error::after {
+  position: absolute;
+  content: attr(data-error);
+  width: 150px;
+  height: 25px;
+  background-color: white;
+  color: red;
+  padding: 10px;
+  border-radius: 25px;
+  right: -200px;
+  text-align: center;
+}
+
+.form-item.error::before {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 2px;
+  background-color: red;
+  right: -30px;
+}
+
+.form-item.error:nth-child(3):before {
+  top: 30px;
+  width: 155px;
+}

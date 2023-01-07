@@ -1,30 +1,30 @@
 export const navLinks = [
   {
-    title: "All topic",
-    path: "/",
+    title: 'All topic',
+    path: '',
   },
   {
-    title: "HTML/CSS",
-    path: "/html-css",
+    title: 'HTML/CSS',
+    path: 'HTML-CSS',
   },
   {
-    title: "JavaScript",
-    path: "/javascript",
+    title: 'JavaScript',
+    path: 'JavaScript',
   },
   {
-    title: "NodeJS",
-    path: "/node-js",
+    title: 'NodeJS',
+    path: 'node-js',
   },
   {
-    title: "AI",
-    path: "/ai",
+    title: 'AI',
+    path: 'ai',
   },
   {
-    title: "ReactJS",
-    path: "/react-js",
+    title: 'ReactJS',
+    path: 'react-js',
   },
   {
-    title: "VueJS",
-    path: "/vue-js",
+    title: 'VueJS',
+    path: 'vue-js',
   },
 ];

@@ -1,0 +1,37 @@
+.notification-wrapper {
+  position: fixed;
+  width: 350px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  animation: slideDown 0.8s linear;
+  z-index: 99999;
+}
+
+.notification-wrapper.error {
+  background-color: red;
+}
+
+.notification-wrapper.success {
+  background-color: green;
+}
+
+.notification-wrapper .title {
+  line-height: 23px;
+}
+
+.notification-wrapper .icon {
+  align-self: center;
+  justify-self: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.notification-wrapper .icon:hover {
+  opacity: 0.7;
+}

@@ -1,19 +1,19 @@
-import { ReactNode } from "react";
-import "./card-list.css";
+import { ReactNode } from 'react';
+import './card-list.css';
 
 type CardListProps = {
-  children?: ReactNode;
-  customStyles?: {
-    [key: string]: string;
-  };
+    children?: ReactNode;
+    customStyles?: {
+        [key: string]: string;
+    };
 };
 
-function CardList(props: CardListProps) {
-  return (
-    <section className="card-list" style={props.customStyles || {}}>
-      {props.children}
-    </section>
-  );
-}
+const CardList = (props: CardListProps) => {
+    return (
+        <section className="card-list" style={props.customStyles || {}}>
+            {props.children}
+        </section>
+    );
+};
 
 export default CardList;

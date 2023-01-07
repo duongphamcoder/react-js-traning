@@ -1,0 +1,11 @@
+@keyframes spinner {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    top: -100%;
+  }
+}
