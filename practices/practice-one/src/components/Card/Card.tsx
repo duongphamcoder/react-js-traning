@@ -3,7 +3,6 @@ import Heading from 'components/Heading';
 import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import './card.css';
-
 import bntDelete from 'assets/icons/delete-icon.svg';
 import bntEdit from 'assets/icons/update-icon.svg';
 

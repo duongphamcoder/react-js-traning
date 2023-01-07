@@ -5,13 +5,14 @@ import useNotification from 'hooks/useNotification';
 import Notification from 'components/Notification';
 import Loading from 'components/Loading';
 import useStore from 'hooks/useStore';
+import useForm from 'hooks/useForm';
 
 type DefaultLayoutProps = {
     children?: ReactNode;
 };
 
 const DefaultLayout = (props: DefaultLayoutProps) => {
-    const [stateStore, dispatch] = useStore();
+    const [stateStore] = useStore();
     const [stateNotify] = useNotification();
     const { isShow, ...rest } = stateNotify;
     const { loading } = stateStore;

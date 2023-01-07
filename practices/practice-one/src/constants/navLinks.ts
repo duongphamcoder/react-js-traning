@@ -5,11 +5,11 @@ export const navLinks = [
   },
   {
     title: 'HTML/CSS',
-    path: 'html-css',
+    path: 'HTML-CSS',
   },
   {
     title: 'JavaScript',
-    path: 'javascript',
+    path: 'JavaScript',
   },
   {
     title: 'NodeJS',
